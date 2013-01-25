@@ -1,0 +1,11 @@
+before_install:
+    - "export DISPLAY=:99.0"
+    - "sh -e /etc/init.d/xvfb start"
+
+install:
+    - "wget -O addon-sdk.tar.gz https://ftp.mozilla.org/pub/mozilla.org/labs/jetpack/addon-sdk-1.12.tar.gz"
+    - "tar -xf addon-sdk.tar.gz"
+    - "alias cfx=`pwd`/addon-sdk-1.12/bin/cfx"
+script: 
+    - "cfx test"
+    - "cfx xpi"
