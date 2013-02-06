@@ -1,15 +1,24 @@
-before_install:
-    - "export DISPLAY=:99.0"
-    - "sh -e /etc/init.d/xvfb start"
-
-install:
-    - "wget -O addon-sdk.tar.gz https://ftp.mozilla.org/pub/mozilla.org/labs/jetpack/addon-sdk-1.12.tar.gz"
-    - "tar -xf addon-sdk.tar.gz"
-    - "alias cfx=`pwd`/addon-sdk-1.12/bin/cfx"
-
+--- 
+notifications: 
+  irc: irc.cc.tut.fi#foxonfire
+env: 
+  matrix: 
+  - secure: |-
+      Uf7YmlFEpW7fRK9iG8kLtBZaTTggGUQ0rLqSV+ukaY8T5Bfh8NKmlpQ3EYE9
+      N9yCq+VKTfiRA8kRlUeQ6JkQmYXNxQXExnkNTgzpE+u/c3ouBNnQdCCpsFrX
+      CdzQVmoLXqC3t4JgaNLroL6XaeW8EYA1VMOsn9xtHPE/G8+AjqM=
+  global: 
+  - secure: |-
+      p2Z0SAUc8uhU9ZNHLyFfD5/Tc+NlUFJmxwCf8/Mk7bm7TUeAHG9gJQGTmEpF
+      +PLyg/PX5VHqWc2crrFGZ4woHtftufHdeDPBcO8wIKAFK/WtnKygrweHWcwS
+      GvV+mp5yfzq4iLnIhK1LXba+YTggjLGlTI4Cz6aj0ncV2juQxJ4=
+install: 
+- wget -O addon-sdk.tar.gz https://ftp.mozilla.org/pub/mozilla.org/labs/jetpack/addon-sdk-1.12.tar.gz
+- tar -xf addon-sdk.tar.gz
 script: 
-    - "cfx test"
-    - "cfx xpi"
-
-notifications:
-  irc: "irc.cc.tut.fi#foxonfire"
+- ~/build/ohtufox/isa/addon-sdk-1.12/bin/cfx test
+- ~/build/ohtufox/isa/addon-sdk-1.12/bin/cfx xpi
+- ./upload.sh
+before_install: 
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
