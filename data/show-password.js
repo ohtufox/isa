@@ -1,4 +1,4 @@
-exports.showPassword = showPassword;
+//exports.showPassword = showPassword;
 
 function showPassword(element) {
     if(element.type === 'password')  
