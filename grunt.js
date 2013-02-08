@@ -5,8 +5,8 @@ module.exports = function(grunt) {
             data: 'data/**/*.js',
             lib: 'lib/**/*.js',
             grunt: 'grunt.js',
-            tests-content-script: 'test/content-script/**/*.js',
-            tests-module: 'test/module/**/*.js'
+            testContentScript: 'test/content-script/**/*.js',
+            testModule: 'test/module/**/*.js'
         },
         qunit: {
             files: ['test/content-script/*.html']
