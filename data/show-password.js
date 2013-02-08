@@ -1,9 +1,16 @@
-//exports.showPassword = showPassword;
 
-function showPassword(element) {
-    if(element.type === 'password')  
-        element.type = 'text';
-    setTimeout(function(){
-        element.type = 'password';
-    }, 3000);
-}
+(function(showPwd, undefined){
+	showPwd.peekPassword = function(element) {
+		showPassword(element);
+		setTimeout(hidePassword, 3000, element);
+	};
+	
+	function showPassword(element){
+		element.type = 'text';
+	}
+	
+	function hidePassword(element){
+		element.type = 'password';
+	}
+}(window.showPwd = window.showPwd || {}));
+
