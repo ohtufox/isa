@@ -17,8 +17,6 @@ install:
 - wget -O addon-sdk.tar.gz https://ftp.mozilla.org/pub/mozilla.org/labs/jetpack/addon-sdk-1.12.tar.gz
 - tar -xf addon-sdk.tar.gz
 script: 
-- echo "---- RUNNING JSLINT ----"
-- grunt lint --verbose --force
 - echo "---- RUNNING CFX TESTS ----"
 - ~/build/ohtufox/isa/addon-sdk-1.12/bin/cfx test
 - echo "---- RUNNING QUNIT TESTS ----"
