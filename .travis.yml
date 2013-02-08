@@ -20,7 +20,7 @@ script:
 - echo "---- RUNNING CFX TESTS ----"
 - ~/build/ohtufox/isa/addon-sdk-1.12/bin/cfx test
 - echo "---- RUNNING QUNIT TESTS ----"
-- grunt qunit --verbose --force
+- ./tests.sh
 - echo "---- BUILDING .XPI ----"
 - ~/build/ohtufox/isa/addon-sdk-1.12/bin/cfx xpi
 - echo "---- UPLOADING THE ADDON ----"
@@ -30,8 +30,6 @@ before_install:
 - echo "---- CREATING A FAKE DISPLAY ----"
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
-- echo "---- INSTALLING GRUNT ----"
-- sudo npm install -g grunt >/dev/null 2>&1
 branches:
   only:
     - master
