@@ -1,8 +1,14 @@
 
 (function(showPwd, undefined){
+	let peekTime = 3000;
+	
+	showPwd.setPeekTime = function(time) {
+		peekTime = time;
+	};
+
 	showPwd.peekPassword = function(element) {
 		showPassword(element);
-		setTimeout(hidePassword, 3000, element);
+		setTimeout(hidePassword, peekTime, element);
 	};
 	
 	function showPassword(element){

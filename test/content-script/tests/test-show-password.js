@@ -3,14 +3,14 @@ var element = inputFields[0];
 
 test( "show password in text", function() {
 	showPwd.peekPassword(element);
-	ok( element.type === "text", "input is text" );
+	ok( element.type === "text", "input is changed to text" );
 });
 
-asyncTest("after 3sec hide password", function() {
+asyncTest("after peek hide password", function() {
+	showPwd.setPeekTime(10);
 	showPwd.peekPassword(element);
- 
 	setTimeout(function() {
-    ok( element.type === "password", "after 3001ms input is password" );
+    ok( element.type === "password", "after given time input is password" );
     start();
-  }, 3001);
+  }, 11);
 });
