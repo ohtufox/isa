@@ -13,15 +13,28 @@ env:
       +PLyg/PX5VHqWc2crrFGZ4woHtftufHdeDPBcO8wIKAFK/WtnKygrweHWcwS
       GvV+mp5yfzq4iLnIhK1LXba+YTggjLGlTI4Cz6aj0ncV2juQxJ4=
 install: 
+- echo "---- INSTALLING JETPACK SDK ----"
 - wget -O addon-sdk.tar.gz https://ftp.mozilla.org/pub/mozilla.org/labs/jetpack/addon-sdk-1.12.tar.gz
 - tar -xf addon-sdk.tar.gz
 script: 
+- echo "---- RUNNING JSLINT ----"
+- grunt lint --verbose --force
+- echo "---- RUNNING CFX TESTS ----"
 - ~/build/ohtufox/isa/addon-sdk-1.12/bin/cfx test
+- echo "---- RUNNING QUNIT TESTS ----"
+- grunt qunit --verbose --force
+- echo "---- BUILDING .XPI ----"
 - ~/build/ohtufox/isa/addon-sdk-1.12/bin/cfx xpi
+- echo "---- UPLOADING THE ADDON ----"
 - ./upload.sh
+- echo "---- DONE ----"
 before_install: 
+- echo "---- CREATING A FAKE DISPLAY ----"
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
+- echo "---- INSTALLING GRUNT ----"
+- sudo npm install -g grunt >/dev/null 2>&1z
 branches:
   only:
     - master
+    - /^CI-.*$/
