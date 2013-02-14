@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>QUnit Example</title>
+        <link rel="stylesheet" href="qunit/qunit.css" />
+    </head>
+    <body>
+        <div id="qunit"></div>
+        <div id="qunit-fixture">
+            <input id="password1" type="password"/>
+            <div id="passwordFieldContainer"></div>
+        </div>
+        <script type="application/javascript;version=1.7">
+            //Lets create some password fields with JavaScript
+            var container = document.getElementById("passwordFieldContainer");
+            container.innerHTML += "<input type=\"password\"/>";
+        </script>
+      <script src="qunit/qunit.js"></script>
+      <script src="qunit/jquery-1.9.1.min.js"></script>
+      <script src="../../data/field-finder.js" type="application/javascript;version=1.7"></script>
+      <script src="../../data/show-password.js" type="application/javascript;version=1.7"></script>
+      <script src="../../data/intelligent-security-advisor.js" type="application/javascript;version=1.7"></script>
+      <script src="tests/test-intelligent-security-advisor.js" type="application/javascript;version=1.7"></script>   
+      <script type="application/javascript;version=1.7">
+            // ...some more password fields with JavaScript
+            var container = document.getElementById("passwordFieldContainer");
+            container.innerHTML += "<input type=\"password\"/>";
+            //Password field count: 3
+       </script>
+    </body>
+</html>
+

@@ -1,0 +1,1 @@
+intelligentSecurityAdvisor.init();
