@@ -1,3 +1,5 @@
 function showInfo(element) {
-	element.title = "double click to show password";
+	let msg = "double click to show password";
+	element.title = msg;
+	self.port.emit('info', msg);
 }
