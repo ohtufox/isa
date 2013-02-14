@@ -17,7 +17,10 @@ func main() {
 	stopSelenium()
 
 	if err != nil {
+		log.Println("FAIL")
 		os.Exit(1)
+	} else {
+		log.Println("SUCCESS")
 	}
 }
 
@@ -36,6 +39,7 @@ func startSelenium() {
 	start := time.Now()
 	for line := ""; !strings.Contains(line, "SocketListener"); line, _ = out.ReadString('\n') {
 		if time.Since(start) > time.Second*10 {
+			stopSelenium()
 			log.Fatalln("FAIL: Starting selenium took too long")
 		}
 		time.Sleep(time.Millisecond * 100)
@@ -69,6 +73,8 @@ func runTests() error {
 	defer wd.Quit()
 
 	for _, test := range tests {
+		start := time.Now()
+
 		wd.Get(fmt.Sprintf(test, pwd))
 		fmt.Println(test, pwd)
 
@@ -89,8 +95,18 @@ func runTests() error {
 			}
 
 			if strings.HasPrefix(output, "Tests completed") {
-				break
+				if strings.HasSuffix(output, "0 failed.") {
+					break
+				}
+				log.Println("TODO: What fails?")
+				os.Exit(1)
 			}
+
+			if time.Since(start) > time.Second*10 {
+				log.Println("Tests took more than 10 seconds")
+				os.Exit(1)
+			}
+
 			time.Sleep(time.Millisecond * 100)
 		}
 
