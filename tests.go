@@ -13,8 +13,12 @@ import (
 
 func main() {
 	startSelenium()
-	runTests()
+	err := runTests()
 	stopSelenium()
+
+	if err != nil {
+		os.Exit(1)
+	}
 }
 
 // Start Selenium and wait for it to print some output before continuing.
@@ -28,7 +32,7 @@ func startSelenium() {
 		log.Fatalln(err)
 	}
 
-        // Wait for Selenium to start
+	// Wait for Selenium to start
 	start := time.Now()
 	for line := ""; !strings.Contains(line, "SocketListener"); line, _ = out.ReadString('\n') {
 		if time.Since(start) > time.Second*10 {
@@ -54,14 +58,13 @@ var tests = []string{
 	"file://%s/test/content-script/field-finder.html",
 }
 
-
-func runTests() {
+func runTests() error {
 	// FireFox driver
 	caps := selenium.Capabilities{"browserName": "firefox"}
 	wd, err := selenium.NewRemote(caps, "")
 	if err != nil {
 		log.Println(err)
-		return
+		return err
 	}
 	defer wd.Quit()
 
@@ -73,7 +76,7 @@ func runTests() {
 		div, err := wd.FindElement(selenium.ByCSSSelector, "#qunit-testresult")
 		if err != nil {
 			log.Println(err)
-			return
+			return err
 		}
 
 		output := ""
@@ -82,7 +85,7 @@ func runTests() {
 			output, err = div.Text()
 			if err != nil {
 				log.Println(err)
-				return
+				return err
 			}
 
 			if strings.HasPrefix(output, "Tests completed") {
@@ -93,4 +96,6 @@ func runTests() {
 
 		fmt.Printf("%s:\n%s\n", test, output)
 	}
+
+	return nil
 }
