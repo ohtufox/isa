@@ -3,6 +3,7 @@ package main
 import (
 	"bitbucket.org/tebeka/selenium"
 	"bytes"
+	"errors"
 	"fmt"
 	"log"
 	"os"
@@ -17,6 +18,7 @@ func main() {
 	stopSelenium()
 
 	if err != nil {
+		log.Println(err)
 		log.Println("FAIL")
 		os.Exit(1)
 	} else {
@@ -38,10 +40,10 @@ func startSelenium() {
 	// Wait for Selenium to start
 	start := time.Now()
 	for line := ""; !strings.Contains(line, "SocketListener"); line, _ = out.ReadString('\n') {
-		if time.Since(start) > time.Second*10 {
+		if time.Since(start) > time.Second*20 {
 			stopSelenium()
 			log.Println("FAIL: Starting selenium took too long")
-                        os.Exit(0) // XXX: There seems to be some bug preventing selenium from starting every now and then..
+			os.Exit(0) // XXX: There seems to be some bug preventing selenium from starting every now and then..
 		}
 		time.Sleep(time.Millisecond * 100)
 		fmt.Print(".")
@@ -60,7 +62,8 @@ var pwd = os.Getenv("PWD")
 
 // Slice containing all qunit test files
 var tests = []string{
-	"file://%s/test/content-script/field-finder.html",
+	"file://%s/test/content-script/test-field-finder.html",
+	"file://%s/test/content-script/test-show-password.html",
 }
 
 func runTests() error {
@@ -68,7 +71,6 @@ func runTests() error {
 	caps := selenium.Capabilities{"browserName": "firefox"}
 	wd, err := selenium.NewRemote(caps, "")
 	if err != nil {
-		log.Println(err)
 		return err
 	}
 	defer wd.Quit()
@@ -77,12 +79,11 @@ func runTests() error {
 		start := time.Now()
 
 		wd.Get(fmt.Sprintf(test, pwd))
-		fmt.Println(test, pwd)
+		log.Printf(test, pwd)
 
 		// Get the result
 		div, err := wd.FindElement(selenium.ByCSSSelector, "#qunit-testresult")
 		if err != nil {
-			log.Println(err)
 			return err
 		}
 
@@ -91,7 +92,6 @@ func runTests() error {
 		for {
 			output, err = div.Text()
 			if err != nil {
-				log.Println(err)
 				return err
 			}
 
@@ -99,19 +99,25 @@ func runTests() error {
 				if strings.HasSuffix(output, "0 failed.") {
 					break
 				}
-				log.Println("TODO: What fails?")
-				os.Exit(1)
+				resultfields, _ := wd.FindElements(selenium.ByCSSSelector, "li.fail")
+				for _, field := range resultfields {
+					contents, _ := field.Text()
+					if len(contents) > 0 {
+						// Remove some useless trailing info
+						log.Println(strings.Split(contents, "Rerun")[0])
+					}
+				}
+				return errors.New("Tests failed")
 			}
 
 			if time.Since(start) > time.Second*10 {
-				log.Println("Tests took more than 10 seconds")
-				os.Exit(1)
+				return errors.New("Tests took more than 10 seconds")
 			}
 
 			time.Sleep(time.Millisecond * 100)
 		}
 
-		fmt.Printf("%s:\n%s\n", test, output)
+		log.Printf("%s:\n%s\n", test, output)
 	}
 
 	return nil
