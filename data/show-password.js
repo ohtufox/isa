@@ -13,7 +13,7 @@
     };
 
     function fixElement(element, time) {
-        element.addEventListener('dblclick', function(e) {
+        element.addEventListener('click', function(e) {
             showPwd.peekPassword(element, time);
         });
     }
