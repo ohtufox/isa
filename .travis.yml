@@ -4,9 +4,13 @@ notifications:
     channels:
     - ircnet.eversible.com#foxonfire
     use_notice: true
+    skip_join: true
     template:
-    - "[[%{message}]] %{repository}/%{branch}#%{build_number} (%{author})"
+    - "----"
+    - "%{message}
+    - "%{repository}/%{branch}#%{build_number} (%{author})"
     - "Build details : %{build_url}"
+    - "----"
 
 env: 
   matrix: 
