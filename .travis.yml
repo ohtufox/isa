@@ -1,4 +1,5 @@
 --- 
+language: javascript
 notifications: 
   irc: 
     channels:
