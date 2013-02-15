@@ -5,17 +5,32 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"os"
 	"os/exec"
+	"path"
 	"strings"
 	"time"
 )
 
+var (
+	pwd   = os.Getenv("PWD")
+	tests []string
+)
+
+const (
+	TESTPATH = "test/content-script/"
+)
+
 func main() {
-	startSelenium()
-	err := runTests()
-	stopSelenium()
+	var err error
+
+	if err = getTests(); err == nil {
+		startSelenium()
+		err = runTests()
+		stopSelenium()
+	}
 
 	if err != nil {
 		log.Println(err)
@@ -26,14 +41,37 @@ func main() {
 	}
 }
 
+func getTests() error {
+	var (
+		files []os.FileInfo
+		err   error
+	)
+
+	if files, err = ioutil.ReadDir(TESTPATH); err != nil {
+		return err
+	}
+
+	tests = make([]string, 0, len(files))
+	for _, file := range files {
+		if file.IsDir() || !strings.HasSuffix(file.Name(), ".html") {
+			continue
+		}
+		tests = append(tests, file.Name())
+	}
+	return nil
+}
+
 // Start Selenium and wait for it to print some output before continuing.
 func startSelenium() {
+	var (
+		out bytes.Buffer
+		err error
+	)
+
 	cmd := exec.Command("java", "-jar", "selenium.jar")
-	var out bytes.Buffer
 	cmd.Stdout = &out
 
-	err := cmd.Start()
-	if err != nil {
+	if err = cmd.Start(); err != nil {
 		log.Fatalln(err)
 	}
 
@@ -58,15 +96,13 @@ func stopSelenium() {
 	cmd.Run()
 }
 
-var pwd = os.Getenv("PWD")
-
-// Slice containing all qunit test files
-var tests = []string{
-	"file://%s/test/content-script/test-field-finder.html",
-	"file://%s/test/content-script/test-show-password.html",
+func pathTo(testfile string) string {
+	return "file://" + path.Join(pwd, TESTPATH, testfile)
 }
 
 func runTests() error {
+	var failed bool
+
 	// FireFox driver
 	caps := selenium.Capabilities{"browserName": "firefox"}
 	wd, err := selenium.NewRemote(caps, "")
@@ -78,8 +114,8 @@ func runTests() error {
 	for _, test := range tests {
 		start := time.Now()
 
-		wd.Get(fmt.Sprintf(test, pwd))
-		log.Printf(test, pwd)
+		wd.Get(pathTo(test))
+		log.Printf(test)
 
 		// Get the result
 		div, err := wd.FindElement(selenium.ByCSSSelector, "#qunit-testresult")
@@ -101,13 +137,14 @@ func runTests() error {
 				}
 				resultfields, _ := wd.FindElements(selenium.ByCSSSelector, "li.fail")
 				for _, field := range resultfields {
+					failed = true
 					contents, _ := field.Text()
 					if len(contents) > 0 {
 						// Remove some useless trailing info
 						log.Println(strings.Split(contents, "Rerun")[0])
 					}
 				}
-				return errors.New("Tests failed")
+				log.Printf("\n%s\n", output)
 			}
 
 			if time.Since(start) > time.Second*10 {
@@ -117,7 +154,9 @@ func runTests() error {
 			time.Sleep(time.Millisecond * 100)
 		}
 
-		log.Printf("%s:\n%s\n", test, output)
+	}
+	if failed {
+		return errors.New("Tests failed")
 	}
 
 	return nil
