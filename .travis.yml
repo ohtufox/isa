@@ -1,6 +1,13 @@
 --- 
 notifications: 
-  irc: ircnet.eversible.com#foxonfire
+  irc: 
+    channels:
+    - ircnet.eversible.com#foxonfire
+    use_notice: true
+    template:
+    - "[[%{message}]] %{repository}/%{branch}#%{build_number} (%{author})"
+    - "Build details : %{build_url}"
+
 env: 
   matrix: 
   - secure: |-
@@ -12,10 +19,12 @@ env:
       p2Z0SAUc8uhU9ZNHLyFfD5/Tc+NlUFJmxwCf8/Mk7bm7TUeAHG9gJQGTmEpF
       +PLyg/PX5VHqWc2crrFGZ4woHtftufHdeDPBcO8wIKAFK/WtnKygrweHWcwS
       GvV+mp5yfzq4iLnIhK1LXba+YTggjLGlTI4Cz6aj0ncV2juQxJ4=
+
 install: 
 - echo "---- INSTALLING JETPACK SDK ----" >/dev/null
 - wget -O addon-sdk.tar.gz https://ftp.mozilla.org/pub/mozilla.org/labs/jetpack/addon-sdk-1.12.tar.gz
 - tar -xf addon-sdk.tar.gz
+
 script: 
 - echo "---- RUNNING CFX TESTS ----" >/dev/null
 - ~/build/ohtufox/isa/addon-sdk-1.12/bin/cfx test
@@ -26,10 +35,12 @@ script:
 - echo "---- UPLOADING THE ADDON ----" >/dev/null
 - ./upload.sh
 - echo "---- DONE ----" >/dev/null
+
 before_install: 
 - echo "---- CREATING A FAKE DISPLAY ----" >/dev/null
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
+
 branches:
   only:
     - master
