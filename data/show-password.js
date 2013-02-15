@@ -9,7 +9,7 @@
         let passwordFields = finder.findPasswordFields();
         for(let i = 0; i < passwordFields.length; i++) {
             fixElement(passwordFields[i], time);
-			sendInfo(passwordFields[i]);
+			addInfo(passwordFields[i]);
         }
     };
 
@@ -27,12 +27,16 @@
 		element.type = 'password';
 	}
 	
-	function sendInfo(element) {
+	function addInfo(element) {
 		element.addEventListener('dblclick', function(e) {
-			let msg = "click to show password";
-			element.title = msg;
-			self.port.emit('info', msg);
+			sendInfo(element, "click to show password");
         });
 	}
+	
+	function sendInfo(element, msg) {
+		element.title = msg;
+		self.port.emit('info', msg);
+	}
+	
 }(window.showPwd = window.showPwd || {}, fieldFinder));
 
