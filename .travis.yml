@@ -8,7 +8,7 @@ notifications:
     skip_join: true
     template:
     - "----"
-    - "%{message}
+    - "%{message}"
     - "%{repository}/%{branch}#%{build_number} (%{author})"
     - "Build details : %{build_url}"
     - "----"
