@@ -7,6 +7,7 @@
 	
     showPwd.fixPage = function(time) {
         let passwordFields = finder.findPasswordFields();
+        console.log('passwords: ' + passwordFields.length);
         for(let i = 0; i < passwordFields.length; i++) {
             fixElement(passwordFields[i], time);
         }

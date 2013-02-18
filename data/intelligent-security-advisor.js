@@ -8,11 +8,11 @@
     function addDOMListener() {
         var MutationObserver = window.MutationObserver;
         let observer = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
+            console.log('mutation observed');
                 showPwd.fixPage(3000);
-            });
         });
-        observer.observe(document.body, {childList:true, subtree:true});
+        let container = document.getElementById('passwordFieldContainer');
+        observer.observe(document.body, {attributes:true, childList:true, subtree:true, characterData:true, characterData:true});
     }
 
 }(window.intelligentSecurityAdvisor = window.intelligentSecurityAdvisor || {}, showPwd));
