@@ -11,9 +11,24 @@
             <input type="password"/>
             <div id="passwordFieldContainer"></div>
         </div>
+        <script type="application/javascript;version=1.7">
+            //Lets create some password fields with JavaScript
+            var container = document.getElementById("passwordFieldContainer");
+            container.innerHTML += "<input type=\"password\"/>";
+        </script>
       <script src="qunit/qunit.js"></script>
       <script src="../../data/field-finder.js" type="application/javascript;version=1.7"></script>
+<<<<<<< HEAD:test/content-script/test-field-finder.html
       <script src="tests/test-field-finder.js" type="application/javascript;version=1.7"></script>   
+=======
+      <script src="tests/field-finder.js" type="application/javascript;version=1.7"></script>   
+        <script type="application/javascript;version=1.7">
+            // ...some more password fields with JavaScript
+            var container = document.getElementById("passwordFieldContainer");
+            container.innerHTML += "<input type=\"password\"/>";
+            //Password field count: 3
+        </script>
+>>>>>>> JavaScript generated field finder test.:test/content-script/field-finder.html
     </body>
 </html>
 
