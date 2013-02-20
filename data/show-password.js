@@ -29,7 +29,7 @@
 	
 	function addInfo(element) {
 		element.addEventListener('dblclick', function(e) {
-			sendInfo(element, "click to show password");
+			sendInfo(element, "click field to show password");
         });
 	}
 	
