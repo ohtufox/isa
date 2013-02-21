@@ -18,3 +18,17 @@ asyncTest( 'JavaScript generated password field click peek test', function() {
         start();
     }, 50);
 });
+
+asyncTest( 'JavaScript changed password field click peek test', function() {
+    let container = document.getElementById('passwordFieldContainer');
+    container.innerHTML += '<input id=\"password5\" type=\"text\"/>';
+    let testElement = document.getElementById('password5');
+    ok( testElement.type === 'text', 'Element is originally of the type of text' );
+    testElement.type = 'password';
+    ok( testElement.type === 'password', 'Element is mutated to the type of password' );
+    setTimeout(function() {
+        $('#password5').click();
+        ok( testElement.type === 'text', 'After a click element is of the type of text' );
+        start();
+    }, 50);
+});

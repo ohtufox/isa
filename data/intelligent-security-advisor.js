@@ -1,16 +1,22 @@
 (function(intelligentSecurityAdvisor, showPwd, undefined) {
     
+    const DOM_LISTENER_TARGET = document.body;
+    const DOM_LISTENER_OPTIONS = {
+                                  childList:true,
+                                  subtree:true
+                                 };
+
     intelligentSecurityAdvisor.init = function() {
         showPwd.fixPage(3000);
         addDOMListener();
     };
 
     function addDOMListener() {
-        var MutationObserver = window.MutationObserver;
+        let MutationObserver = window.MutationObserver;
         let observer = new MutationObserver(function(mutations) {
                 checkMutations(mutations);
         });
-        observer.observe(document.body, {childList:true, subtree:true});
+        observer.observe(DOM_LISTENER_TARGET, DOM_LISTENER_OPTIONS);
     }
 
     function checkMutations(mutations) {
