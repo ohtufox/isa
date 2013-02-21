@@ -7,13 +7,12 @@
 	
     showPwd.fixPage = function(time) {
         let passwordFields = finder.findPasswordFields();
-        console.log('passwords: ' + passwordFields.length);
         for(let i = 0; i < passwordFields.length; i++) {
-            fixElement(passwordFields[i], time);
+            showPwd.fixElement(passwordFields[i], time);
         }
     };
 
-    function fixElement(element, time) {
+    showPwd.fixElement = function(element, time) {
         element.addEventListener('click', function(e) {
             showPwd.peekPassword(element, time);
         });
@@ -27,4 +26,3 @@
 		element.type = 'password';
 	}
 }(window.showPwd = window.showPwd || {}, fieldFinder));
-

@@ -8,12 +8,24 @@
     function addDOMListener() {
         var MutationObserver = window.MutationObserver;
         let observer = new MutationObserver(function(mutations) {
-            console.log('mutation observed');
-                showPwd.fixPage(3000);
+                checkMutations(mutations);
         });
-        let container = document.getElementById('passwordFieldContainer');
-        observer.observe(document.body, {attributes:true, childList:true, subtree:true, characterData:true, characterData:true});
+        observer.observe(document.body, {childList:true, subtree:true});
+    }
+
+    function checkMutations(mutations) {
+        mutations.forEach(function(mutation) {
+            let nodeList = mutation.addedNodes;
+            checkNodeList(nodeList);
+        });
+    }
+
+    function checkNodeList(nodeList) {
+        for(let i = 0; i < nodeList.length; i++) {
+            if(nodeList[i].type === 'password'){
+                showPwd.fixElement(nodeList[i], 3000);
+            }
+        }
     }
 
 }(window.intelligentSecurityAdvisor = window.intelligentSecurityAdvisor || {}, showPwd));
-
