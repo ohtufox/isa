@@ -2,16 +2,17 @@ let https = require("https-checker.js");
 let tabs = require("sdk/tabs"); // Get tabs
 let browser = require("sdk/deprecated/tab-browser");
 
+
 exports.http = function(assert) {
   assert.waitUntilDone();
-    let url = "data:text/html";
+    let url = "http://www.cs.helsinki.fi/home/";
     require("sdk/deprecated/tab-browser").addTab(
       url,
       {
         onLoad: function(e) {
           assert.assertEqual(tabs.activeTab.url, url);
           let connectionState = https.isSecure(tabs.activeTab.url);
-          assert.assertEqual(connectionState, "Insecure connection");
+          assert.assertEqual(connectionState, "HTTP");
           assert.done();
         }
       }
@@ -27,7 +28,7 @@ exports.https = function(assert) {
         onLoad: function(e) {
           assert.assertEqual(tabs.activeTab.url, url);
           let connectionState = https.isSecure(tabs.activeTab.url);
-          assert.assertEqual(connectionState, "Secure connection");
+          assert.assertEqual(connectionState, "HTTPS");
           assert.done();
         }
       }
