@@ -8,13 +8,13 @@
     <body>
         <div id="qunit"></div>
         <div id="qunit-fixture">
-            <input id="password1" type="password"/>
+            <input id="password1" type="password" value="bar"/>
             <div id="passwordFieldContainer"></div>
         </div>
         <script type="application/javascript;version=1.7">
             //Lets create some password fields with JavaScript
             var container = document.getElementById("passwordFieldContainer");
-            container.innerHTML += "<input type=\"password\"/>";
+            container.innerHTML += '<input value="foo" type="password"/>';
         </script>
       <script src="qunit/qunit.js"></script>
       <script src="qunit/jquery-1.9.1.min.js"></script>
