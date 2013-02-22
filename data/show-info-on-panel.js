@@ -4,9 +4,9 @@ self.port.on("msg", function (msg) {
 });
 
 function addInfoToPage(msg) {
-	var area = document.getElementById("infoarea");
-	var element = document.createElement("p");
-	var node = document.createTextNode(msg);
+	let area = document.getElementById("infoarea");
+	let element = document.createElement("p");
+	let node = document.createTextNode(msg);
 	element.appendChild(node);	
 	area.appendChild(element);
 }

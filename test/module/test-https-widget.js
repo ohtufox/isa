@@ -1,18 +1,19 @@
-let https = require("https-checker.js");
-let tabs = require("sdk/tabs"); // Get tabs
-let browser = require("sdk/deprecated/tab-browser");
+let https = require('https-checker.js');
+let tabs = require('sdk/tabs'); // Get tabs
+let browser = require('sdk/deprecated/tab-browser');
+let testHelper = require('test-helper');
 
 
 exports.http = function(assert) {
   assert.waitUntilDone();
-    let url = "http://www.cs.helsinki.fi/home/";
-    require("sdk/deprecated/tab-browser").addTab(
+    let url = testHelper.getHtmlFolder(module.uri) + '/test.html';;
+    require('sdk/deprecated/tab-browser').addTab(
       url,
       {
         onLoad: function(e) {
           assert.assertEqual(tabs.activeTab.url, url);
           let connectionState = https.isSecure(tabs.activeTab.url);
-          assert.assertEqual(connectionState, "HTTP");
+          assert.assertEqual(connectionState, 'HTTP');
           assert.done();
         }
       }
@@ -21,14 +22,14 @@ exports.http = function(assert) {
 
 exports.https = function(assert) {
   assert.waitUntilDone();
-    let url = "https://github.com/";
-    require("sdk/deprecated/tab-browser").addTab(
+    let url = 'https://github.com/';
+    require('sdk/deprecated/tab-browser').addTab(
       url,
       {
         onLoad: function(e) {
           assert.assertEqual(tabs.activeTab.url, url);
           let connectionState = https.isSecure(tabs.activeTab.url);
-          assert.assertEqual(connectionState, "HTTPS");
+          assert.assertEqual(connectionState, 'HTTPS');
           assert.done();
         }
       }

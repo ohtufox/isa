@@ -1,16 +1,16 @@
 (function(fieldFinder, undefined) {
     fieldFinder.findPasswordFields = function() {
-        var inputElements = findInputFields();
-        var passwordFields = getPasswordFieldsFromInputs(inputElements);
+        let inputElements = findInputFields();
+        let passwordFields = getPasswordFieldsFromInputs(inputElements);
         return passwordFields;
     };
 
     function getPasswordFieldsFromInputs(inputElements) {
-        var inputElementCount = inputElements.length;
-        var passwordFields = new Array();
-        for(var i = 0; i < inputElementCount; i++) {
+        let inputElementCount = inputElements.length;
+        let passwordFields = new Array();
+        for(let i = 0; i < inputElementCount; i++) {
             if(inputElements[i].type === 'password') {
-                var element = inputElements[i];
+                let element = inputElements[i];
                 passwordFields.push(element);
             }
         }
@@ -18,7 +18,7 @@
     }
 
     function findInputFields() {
-        var inputFields = document.getElementsByTagName('input');
+        let inputFields = document.getElementsByTagName('input');
         return inputFields;
     } 
 
