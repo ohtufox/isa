@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang=en>
+    <head>
+        <meta charset=utf-8>
+        <title>Receiver</title>
+    </head>
+    <body>
+        <pre id="data"></div>
+        <script>
+            var req = new XMLHttpRequest();
+            req.open('GET', document.location, false);
+            req.send(null);
+            var headers = req.getAllResponseHeaders().toLowerCase();
+            data.innerHTML = headers;
+        </script>
+    </body>
+</html>
