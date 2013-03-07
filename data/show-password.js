@@ -1,10 +1,11 @@
+
 (function(showPwd, finder, icon, undefined){
     showPwd.peekPassword = function(element, time) {
-		if(element.value.length >0) {
-			showPassword(element);
-			setTimeout(hidePassword, time, element);		
-		}		
-	};
+        if(element.value.length >0) {
+		    showPassword(element);
+		    setTimeout(hidePassword, time, element);		
+	    }		
+    };
 	
     showPwd.fixPage = function(status, time) {
         fieldIcon.init(status);
@@ -18,7 +19,7 @@
         icon.add(element, time);
         element.addEventListener('click', function(e) {
             //showPwd.peekPassword(element, time);
-			isThisDoneBefore(element, time);
+		    isThisDoneBefore(element, time);
         });
     };
     
@@ -32,33 +33,33 @@
 		element.type = 'text';
 	}
 	
-	function hidePassword(element){
-		element.type = 'password';
-	}
+    function hidePassword(element){
+        element.type = 'password';
+    }
 	
-	function isThisDoneBefore(element, time) {
-		let msg = "clicking this will show password in cleartext for 3 secs";
-		self.port.emit('isUsed', msg);
-		self.port.on('storage-status', function(status) {
-			console.log("viesti saatu storagelta:");
-			console.log(status);
-			self.port.emit('used', msg);
+    function isThisDoneBefore(element, time) {
+        let msg = "clicking this will show password in cleartext for 3 secs";
+        self.port.emit('isUsed', msg);
+        self.port.on('storage-status', function(status) {
+            console.log("viesti saatu storagelta:");
+            console.log(status);
+            self.port.emit('used', msg);
 
-			if(!status) {
-				console.log("event for the first time");
+            if(!status) {
+                console.log("event for the first time");
 				
-				self.port.emit('used', msg);	
-			}
+                self.port.emit('used', msg);	
+            }
 			
-			else {
-				console.log("event happened before");
-				showPwd.peekPassword(element, time);
-			}
-		});	
-	}
+            else {
+                console.log("event happened before");
+                showPwd.peekPassword(element, time);
+            }
+        });	
+    }
 		
-	function showTooltip(element, msg) {
-		element.title = msg;
-	}
+    function showTooltip(element, msg) {
+        element.title = msg;
+    }
 	
 }(window.showPwd = window.showPwd || {}, fieldFinder));
