@@ -32,4 +32,8 @@
         element.type = 'password';
     }
 
+    function showTooltip(element, msg) {
+		element.title = msg;
+	}
+    
 }(window.showPwd = window.showPwd || {}, fieldFinder, fieldIcon));
