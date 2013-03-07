@@ -33,7 +33,21 @@
 	}
 	
 	function showTooltip(element, msg) {
-		element.title = msg;
+		self.port.emit('isUsed', msg);
+		self.port.on('storage-status', function(status) {
+			console.log("viesti saatu storagelta:");
+			console.log(status);
+			if(!status) {
+				console.log("event for the first time");
+				element.title = "!!!!"+msg;
+				self.port.emit('used', msg);	
+			}
+			
+			else {
+				console.log("event happened before");
+				element.title = msg;	
+			}
+		});
 	}
 	
 }(window.showPwd = window.showPwd || {}, fieldFinder));
