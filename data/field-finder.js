@@ -1,4 +1,5 @@
 (function(fieldFinder, undefined) {
+
     fieldFinder.findPasswordFields = function() {
         let inputElements = findInputFields();
         let passwordFields = getPasswordFieldsFromInputs(inputElements);
@@ -9,12 +10,15 @@
         let inputElementCount = inputElements.length;
         let passwordFields = new Array();
         for(let i = 0; i < inputElementCount; i++) {
-            if(inputElements[i].type === 'password') {
-                let element = inputElements[i];
-                passwordFields.push(element);
-            }
+            addPasswordField(passwordFields, inputElements[i]);
         }
         return passwordFields;
+    }
+
+    function addPasswordField(array, candidate) {
+        if(candidate.type === 'password') {
+            array.push(candidate);
+        }
     }
 
     function findInputFields() {
