@@ -43,11 +43,10 @@
         self.port.on('storage-status', function(status) {
             console.log("viesti saatu storagelta:");
             console.log(status);
-            self.port.emit('used', msg);
 
-            if(!status) {
+            if(element.value.length >0 && !status) {
                 console.log("event for the first time");
-				
+				self.port.emit('info', msg);
                 self.port.emit('used', msg);	
             }
 			
