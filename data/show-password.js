@@ -2,15 +2,9 @@
 (function(showPwd, finder, icon, undefined){
     showPwd.peekPassword = function(element, time) {
         if(element.value.length >0) {
-<<<<<<< HEAD
             showPassword(element);
             setTimeout(hidePassword, time, element);		
         }		
-=======
-		    showPassword(element);
-		    setTimeout(hidePassword, time, element);		
-	    }		
->>>>>>> some formatting
     };
 	
     showPwd.fixPage = function(status, time) {
@@ -48,11 +42,10 @@
         self.port.on('storage-status', function(status) {
             console.log("viesti saatu storagelta:");
             console.log(status);
-            self.port.emit('used', msg);
 
-            if(!status) {
+            if(element.value.length >0 && !status) {
                 console.log("event for the first time");
-				
+				self.port.emit('info', msg);
                 self.port.emit('used', msg);	
             }
 			
