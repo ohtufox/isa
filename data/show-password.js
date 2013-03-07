@@ -16,6 +16,10 @@
 
     showPwd.fixElement = function(element, time) {
         icon.add(element, time);
+        element.addEventListener('click', function(e) {
+            //showPwd.peekPassword(element, time);
+			isThisDoneBefore(element, time);
+        });
     };
 
     showPwd.showTooltip = function(element, msg) {
