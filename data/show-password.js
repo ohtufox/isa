@@ -16,6 +16,10 @@
 
     showPwd.fixElement = function(element, time) {
         icon.add(element, time);
+        element.addEventListener('click', function(e) {
+            //showPwd.peekPassword(element, time);
+			isThisDoneBefore(element, time);
+        });
     };
     
     showPwd.showTooltip = function(element, msg) {
@@ -23,7 +27,7 @@
             element.title = msg;
         }
     };    
-
+    
 	function showPassword(element){		
 		element.type = 'text';
 	}
@@ -32,22 +36,29 @@
 		element.type = 'password';
 	}
 	
-	function showTooltip(element, msg) {
+	function isThisDoneBefore(element, time) {
+		let msg = "clicking this will show password in cleartext for 3 secs";
 		self.port.emit('isUsed', msg);
 		self.port.on('storage-status', function(status) {
 			console.log("viesti saatu storagelta:");
 			console.log(status);
+			self.port.emit('used', msg);
+
 			if(!status) {
 				console.log("event for the first time");
-				element.title = "!!!!"+msg;
+				
 				self.port.emit('used', msg);	
 			}
 			
 			else {
 				console.log("event happened before");
-				element.title = msg;	
+				showPwd.peekPassword(element, time);
 			}
-		});
+		});	
+	}
+		
+	function showTooltip(element, msg) {
+		element.title = msg;
 	}
 	
 }(window.showPwd = window.showPwd || {}, fieldFinder));
