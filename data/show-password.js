@@ -24,12 +24,16 @@
         }
     };    
 
-    function showPassword(element){
-            element.type = 'text';
-    }
-    
-    function hidePassword(element){
-            element.type = 'password';
-    }
-
-}(window.showPwd = window.showPwd || {}, fieldFinder, fieldIcon));
+	function showPassword(element){		
+		element.type = 'text';
+	}
+	
+	function hidePassword(element){
+		element.type = 'password';
+	}
+	
+	function showTooltip(element, msg) {
+		element.title = msg;
+	}
+	
+}(window.showPwd = window.showPwd || {}, fieldFinder));
