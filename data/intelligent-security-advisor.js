@@ -6,8 +6,8 @@
                                   subtree:true
                                  };
 
-    intelligentSecurityAdvisor.init = function() {
-        showPwd.fixPage(3000);
+    intelligentSecurityAdvisor.init = function(status) {
+        showPwd.fixPage(status, 3000);
         addDOMListener();
     };
 

@@ -1,4 +1,8 @@
-intelligentSecurityAdvisor.init();
+let status = new Object();
+status.good = "../../data/icons/checkmark_32.png";
+status.bad = "../../data/icons/warning_32.png";
+status.httpstatus = "HTTP";
+intelligentSecurityAdvisor.init(status);
 
 test( 'Standard password click peek test', function() {
     let testElement = document.getElementById('password1');

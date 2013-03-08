@@ -6,7 +6,8 @@
 		}		
 	};
 	
-    showPwd.fixPage = function(time) {
+    showPwd.fixPage = function(status, time) {
+        fieldIcon.init(status);
         let passwordFields = finder.findPasswordFields();
         for(let i = 0; i < passwordFields.length; i++) {
             showPwd.fixElement(passwordFields[i], time);

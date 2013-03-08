@@ -1,9 +1,9 @@
 (function(fieldIcon, undefined){
     let sitestatus = "";
 
-    self.port.on("status", function(status) {
+    fieldIcon.init = function(status) {
         sitestatus = status;
-    });
+    }
 
     fieldIcon.add = function(element, time) {
         element.style.cssText = "background-size: auto 100%, auto;";
