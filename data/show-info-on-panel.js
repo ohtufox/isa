@@ -1,5 +1,4 @@
 self.port.on("msg", function (msg) {
-	console.log("this is content script. "+msg);
 	addInfoToPage(msg);
 });
 

@@ -19,7 +19,7 @@
         icon.add(element, time);
         element.addEventListener('click', function(e) {
             //showPwd.peekPassword(element, time);
-		    isThisDoneBefore(element, time);
+		    isPasswordPeekedBefore(element, time);
         });
     };
     
@@ -37,28 +37,23 @@
         element.type = 'password';
     }
 	
-    function isThisDoneBefore(element, time) {
-        let msg = "clicking this will show password in cleartext for 3 secs";
-        self.port.emit('isUsed', msg);
+    function isPasswordPeekedBefore(element, time) {
+        let msg = "clicking will show password in cleartext for 3 secs";
+        self.port.emit('ask-if-used');
         self.port.on('storage-status', function(status) {
-            console.log("viesti saatu storagelta:");
-            console.log(status);
-
             if(element.value.length >0 && !status) {
-                console.log("event for the first time");
 				self.port.emit('info', msg);
-                self.port.emit('used', msg);	
-            }
-			
-            else {
-                console.log("event happened before");
+                self.port.emit('used');	
+            } else {
                 showPwd.peekPassword(element, time);
             }
         });	
     }
 		
     function showTooltip(element, msg) {
-        element.title = msg;
+        if(element.value.length >0) {
+            element.title = msg;
+        }
     }
 	
 }(window.showPwd = window.showPwd || {}, fieldFinder));
