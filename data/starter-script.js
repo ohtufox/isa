@@ -1,1 +1,4 @@
-intelligentSecurityAdvisor.init();
+self.port.on("ready", function() {
+    intelligentSecurityAdvisor.init();
+});
+

@@ -1,8 +1,4 @@
 (function(showPwd, finder, undefined){
-    self.port.on("ready", function() {
-        showPwd.fixPage(3000);
-    });
-
     let sitestatus = "";
 
     self.port.on("status", function(status) {
