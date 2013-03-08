@@ -7,8 +7,10 @@
                                  };
 
     intelligentSecurityAdvisor.init = function() {
-        showPwd.fixPage(3000);
-        addDOMListener();
+	if(document.URL != 'about:newtab') {
+       		showPwd.fixPage(3000);
+        	addDOMListener();
+	}
     };
 
     function addDOMListener() {
