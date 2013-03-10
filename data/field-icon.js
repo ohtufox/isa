@@ -15,7 +15,7 @@
         element.style.paddingLeft = "0px";
         element.style.backgroundPosition = "100% 50%, 100% 50%";
         element.style.backgroundRepeat = "no-repeat";
-		
+
         element.addEventListener('click', function(e) {
             if(element.value.length>0) {
                 settingsChecker.isPasswordPeekedBefore(element, time);
