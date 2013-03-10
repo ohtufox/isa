@@ -19,7 +19,7 @@
         icon.add(element, time);
         element.addEventListener('click', function(e) {
             //showPwd.peekPassword(element, time);
-		    isPasswordPeekedBefore(element, time);
+            isPasswordPeekedBefore(element, time);
         });
     };
 
@@ -30,7 +30,8 @@
     };
 
     function showPassword(element){	
-	    element.type = 'text';
+        element.type = 'text';
+    };    
 	
     function hidePassword(element){
         element.type = 'password';
@@ -38,10 +39,10 @@
 	
     function isPasswordPeekedBefore(element, time) {
         let msg = "clicking will show password in cleartext for 3 secs";
-        self.port.emit('ask-if-used');
+        self.port.emit('request-storage-status');
         self.port.on('storage-status', function(status) {
             if(element.value.length >0 && !status) {
-				self.port.emit('info', msg);
+                self.port.emit('info', msg);
                 self.port.emit('used');	
             } else {
                 showPwd.peekPassword(element, time);
