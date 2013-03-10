@@ -16,9 +16,19 @@
         element.style.backgroundPosition = "100% 50%, 100% 50%";
         element.style.backgroundRepeat = "no-repeat";
 
+        // element.addEventListener('click', function(e) {
+            // showPwd.peekPassword(element, time);
+            // element.focus();
+        // });
+		
+		
         element.addEventListener('click', function(e) {
-            showPwd.peekPassword(element, time);
-            element.focus();
+            showPwd.isPasswordPeekedBefore(element, time);
+			//element.focus();
+        });
+		
+        element.addEventListener('mouseover', function(e) {
+            showPwd.showTooltip(element, 'click to show password');			
         });
         
         element.addEventListener('mouseover', function(e) {
