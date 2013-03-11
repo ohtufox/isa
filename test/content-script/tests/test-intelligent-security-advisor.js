@@ -3,6 +3,7 @@ status.good = "../../data/icons/checkmark_32.png";
 status.bad = "../../data/icons/warning_32.png";
 status.httpstatus = "HTTP";
 intelligentSecurityAdvisor.init(status);
+settingsChecker.pwdHasBeenPeekedBefore();
 
 test( 'Standard password click peek test', function() {
     let testElement = document.getElementById('password1');
@@ -10,6 +11,7 @@ test( 'Standard password click peek test', function() {
     $('#password1').click();
     ok( testElement.type === 'text', 'After a click element is of the type of text' );
 });
+
 
 asyncTest( 'JavaScript generated password field click peek test', function() {
     let container = document.getElementById('passwordFieldContainer');
@@ -36,3 +38,4 @@ asyncTest( 'JavaScript changed password field click peek test', function() {
         start();
     }, 50);
 });
+

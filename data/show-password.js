@@ -1,4 +1,3 @@
-
 (function(showPwd, finder, icon, undefined){
     showPwd.peekPassword = function(element, time) {
         if(element.value.length >0) {
@@ -17,19 +16,6 @@
 
     showPwd.fixElement = function(element, time) {
         icon.add(element, time);
-    };
-
-    showPwd.isPasswordPeekedBefore = function(element, time) {
-        let msg = "clicking will show password in cleartext for 3 secs";
-        self.port.emit('request-storage-status');
-        self.port.on('storage-status', function(status) {
-            if(element.value.length >0 && !status) {
-                self.port.emit('info', msg);
-                self.port.emit('used');	
-            } else {
-                showPwd.peekPassword(element, time);
-            }
-        });	
     };
 
     showPwd.showTooltip = function(element, msg) {

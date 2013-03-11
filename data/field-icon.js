@@ -15,15 +15,9 @@
         element.style.paddingLeft = "0px";
         element.style.backgroundPosition = "100% 50%, 100% 50%";
         element.style.backgroundRepeat = "no-repeat";
-
-        // element.addEventListener('click', function(e) {
-            // showPwd.peekPassword(element, time);
-            // element.focus();
-        // });
-		
 		
         element.addEventListener('click', function(e) {
-            showPwd.isPasswordPeekedBefore(element, time);
+            settingsChecker.isPasswordPeekedBefore(element, time);
 			//element.focus();
         });
 		
