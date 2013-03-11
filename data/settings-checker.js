@@ -1,7 +1,7 @@
 (function(settingsChecker, undefined) {
     let ignore = false;
     let field = '';
-    
+
     settingsChecker.pwdHasBeenPeekedBefore = function() {
         ignore = true;
     };
@@ -30,7 +30,6 @@
         });
     }
     
-
     function sendInfoToPanel() {
         self.port.emit('info', 'Clicking icon again will show password in cleartext for 3 seconds.');
         self.port.emit('used');
