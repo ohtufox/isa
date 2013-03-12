@@ -29,10 +29,10 @@ test('do not show password on cleartext if field is empty', function(){
 	ok( element.type === 'password', 'input is not changed to text if field is empty' );
 }); 
 
-// test('show tooltip when password field is not empty', function() {
-    // let element = document.getElementById('pwdfield4');
-    // element.value = 'password';
-    // showPwd.showTooltip(element, 'show password');
-    // ok( element.title.length > 0, 'field has title' );
-// });
+test('show tooltip when password field is not empty', function() {
+    let element = document.getElementById('pwdfield4');
+    element.value = 'password';
+    showPwd.showTooltip(element, 'show password');
+    ok( element.title.length > 0, 'field has title' );
+});
 
