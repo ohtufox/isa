@@ -20,6 +20,10 @@
             showPwd.peekPassword(element, time);
             element.focus();
         });
+        
+        element.addEventListener('mouseover', function(e) {
+            showPwd.showTooltip(element, 'click to show password');			
+        });
     }
 
 }(window.fieldIcon = window.fieldIcon || {}));

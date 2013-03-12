@@ -16,7 +16,13 @@
 
     showPwd.fixElement = function(element, time) {
         icon.add(element, time);
-    }
+    };
+    
+    showPwd.showTooltip = function(element, msg) {
+        if(element.value.length >0) {
+            element.title = msg;
+        }
+    };    
 
     function showPassword(element){
             element.type = 'text';
