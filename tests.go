@@ -88,12 +88,14 @@ func startSelenium() {
 	}
 	fmt.Println()
 	time.Sleep(time.Millisecond * 1000)
+	log.Println("Selenium is running")
 }
 
 // Just kill all Java.
 func stopSelenium() {
 	cmd := exec.Command("killall", "java")
 	cmd.Run()
+	log.Println("Selenium stopped")
 }
 
 func pathTo(testfile string) string {
@@ -103,6 +105,7 @@ func pathTo(testfile string) string {
 func runTests() error {
 	var failed bool
 
+        log.Println("Starting firefox driver")
 	// FireFox driver
 	caps := selenium.Capabilities{"browserName": "firefox"}
 	wd, err := selenium.NewRemote(caps, "")
@@ -111,6 +114,7 @@ func runTests() error {
 	}
 	defer wd.Quit()
 
+        log.Println("Running tests..")
 	for _, test := range tests {
 		start := time.Now()
 
