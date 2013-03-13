@@ -36,3 +36,10 @@ test('show tooltip when password field is not empty', function() {
     ok( element.title.length > 0, 'field has title' );
 });
 
+test('do not show tooltip when password field is empty', function() {
+    let element = document.getElementById('pwdfield5');
+    element.value = '';
+    showPwd.showTooltip(element, 'show password');
+    ok( element.title.length === 0, 'field does not have a title' );
+});
+
