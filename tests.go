@@ -110,7 +110,6 @@ func runTests() error {
 	caps := selenium.Capabilities{"browserName": "firefox"}
 	wd, err := selenium.NewRemote(caps, "")
 	if err != nil {
-		log.Println(wd, err)
 		return err
 	}
 	defer wd.Quit()
