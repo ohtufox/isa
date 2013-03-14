@@ -17,8 +17,10 @@
         element.style.backgroundRepeat = "no-repeat";
 		
         element.addEventListener('click', function(e) {
-            settingsChecker.isPasswordPeekedBefore(element, time);
-			//element.focus();
+            if(element.value.length>0) {
+                settingsChecker.isPasswordPeekedBefore(element, time);
+                element.focus();
+            }    
         });
 		
         element.addEventListener('mouseover', function(e) {

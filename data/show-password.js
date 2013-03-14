@@ -3,7 +3,7 @@
         if(element.value.length >0) {
             showPassword(element);
             setTimeout(hidePassword, time, element);		
-	    }		
+        }		
     };
 	
     showPwd.fixPage = function(status, time) {
@@ -24,7 +24,7 @@
         }
     };
 
-    function showPassword(element){		
+    function showPassword(element){	
 	    element.type = 'text';
     }
 	
