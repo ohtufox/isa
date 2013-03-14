@@ -24,7 +24,7 @@
         }
     };
 
-    function showPassword(element){		
+    function showPassword(element){	
 	    element.type = 'text';
     }
 	
