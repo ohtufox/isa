@@ -6,11 +6,9 @@
                                   subtree:true
                                  };
 
-    intelligentSecurityAdvisor.init = function() {
-	if(document.URL != 'about:newtab') {
-       		showPwd.fixPage(3000);
-        	addDOMListener();
-	}
+    intelligentSecurityAdvisor.init = function(status) {
+        showPwd.fixPage(status, 3000);
+        addDOMListener();
     };
 
     function addDOMListener() {

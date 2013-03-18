@@ -28,3 +28,18 @@ test('do not show password on cleartext if field is empty', function(){
 	showPwd.peekPassword(element, TEST_PEEK_TIME);
 	ok( element.type === 'password', 'input is not changed to text if field is empty' );
 }); 
+
+test('show tooltip when password field is not empty', function() {
+    let element = document.getElementById('pwdfield4');
+    element.value = 'password';
+    showPwd.showTooltip(element, 'show password');
+    ok( element.title.length > 0, 'field has title' );
+});
+
+test('do not show tooltip when password field is empty', function() {
+    let element = document.getElementById('pwdfield5');
+    element.value = '';
+    showPwd.showTooltip(element, 'show password');
+    ok( element.title.length === 0, 'field does not have a title' );
+});
+
