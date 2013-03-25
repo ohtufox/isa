@@ -9,7 +9,6 @@ exports['Tests testHelpers url creation functionality'] = function(assert) {
     tabs.open({
         url: url,
         onReady: function (tab) {
-            console.log('Testisivu ladattu... ' + tab.title + tab.url);
             assert.assertEqual(tab.url, url);
             assert.assertEqual(tab.title, titleToCheck);
             assert.done();
