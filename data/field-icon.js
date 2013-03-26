@@ -18,6 +18,8 @@
 
         element.addEventListener('click', function(e) {
             if(element.value.length>0) {
+                element.className += " anchorclass"; 
+                console.log(document.querySelector(".anchorclass").className);
                 settingsChecker.isPasswordPeekedBefore(element, time);
                 element.focus();
             }    

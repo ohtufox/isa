@@ -22,7 +22,9 @@
     
     function readStorageStatus(time) {
         self.port.on('storage-status', function(status) {
+//            sendInfoToPanel();   
             if(!status) {
+                console.log("readStatus: "+field.className);
                 sendInfoToPanel();                
             } else {
                 showPwd.peekPassword(field, time);				
