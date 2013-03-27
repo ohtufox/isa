@@ -26,9 +26,8 @@
                 }
             } else {
                 self.port.emit('info', 'This is insecure form.');
-                showPwd.peekPassword(element, time);
-                element.focus();
-            }   
+            }
+            element.focus();    
         });    
 
 		
