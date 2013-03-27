@@ -20,19 +20,19 @@ exports.http = function(assert) {
     );
 };
 
-// exports.https = function(assert) {
-  // assert.waitUntilDone();
-    // let url = 'https://github.com/';
-    // require('sdk/deprecated/tab-browser').addTab(
-      // url,
-      // {
-        // onLoad: function(e) {
-          // assert.assertEqual(tabs.activeTab.url, url);
-          // let connectionState = https.isSecure(tabs.activeTab.url);
-          // assert.assertEqual(connectionState, 'HTTPS');
-          // assert.done();
-        // }
-      // }
-    // );
-// };
+exports.https = function(assert) {
+  assert.waitUntilDone();
+    let url = 'https://github.com/';
+    require('sdk/deprecated/tab-browser').addTab(
+      url,
+      {
+        onLoad: function(e) {
+          assert.assertEqual(tabs.activeTab.url, url);
+          let connectionState = https.isSecure(tabs.activeTab.url);
+          assert.assertEqual(connectionState, 'HTTPS');
+          assert.done();
+        }
+      }
+    );
+};
 
