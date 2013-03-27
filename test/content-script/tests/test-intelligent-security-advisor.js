@@ -1,7 +1,7 @@
 let status = new Object();
 status.good = "../../data/icons/checkmark_32.png";
 status.bad = "../../data/icons/warning_32.png";
-status.httpstatus = "HTTP";
+status.httpstatus = "HTTPS";
 intelligentSecurityAdvisor.init(status);
 settingsChecker.pwdHasBeenPeekedBefore();
 
