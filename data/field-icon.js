@@ -20,18 +20,18 @@
             if(sitestatus.httpstatus == "HTTPS" && element.value.length >0) {            
                 element.className += " anchorclass";
                 settingsChecker.isPasswordPeekedBefore(element, time);
-                closePanel();
+                //closePanel();
             } 
             if(sitestatus.httpstatus !== "HTTPS") {
                 element.className += " anchorclass";
                 self.port.emit('info', 'This is insecure form.');
-                closePanel();                
+                fieldIcon.closePanel();                
             }
             element.focus();
         });
     }
     
-    function closePanel() {
+    fieldIcon.closePanel = function() {
         setTimeout(function() {
             self.port.emit('close-panel');
         }, 3000);        

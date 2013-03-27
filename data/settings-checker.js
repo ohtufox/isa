@@ -24,7 +24,8 @@
         self.port.on('storage-status', function(status) {
             if(!status) {
                 console.log("readStatus: "+field.className);
-                sendInfoToPanel();                
+                sendInfoToPanel();
+                fieldIcon.closePanel();
             } else {
                 showPwd.peekPassword(field, time);				
             }
