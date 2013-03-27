@@ -43,14 +43,13 @@
             // Unsecure site, display warning icon.
             imgi.setAttribute('src', sitestatus.bad);
             // ADD INFOPANEL LISTENER HERE
-            element.addEventListener('click', function(e) { 
+            imgi.className += " anchorclass";
+            imgi.addEventListener('click', function(e) { 
                 if(sitestatus.httpstatus == "HTTPS" && element.value.length >0) {            
-                    element.className += " anchorclass";
                     settingsChecker.isPasswordPeekedBefore(element, time);
                     //closePanel();
                 } 
                 if(sitestatus.httpstatus !== "HTTPS") {
-                    element.className += " anchorclass";
                     self.port.emit('info', 'This is insecure form.');
                     fieldIcon.closePanel();                
                 }
