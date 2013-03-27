@@ -2,7 +2,7 @@ let infopanel = require("info-panel");
 let panel = require('panel');
 
 exports["test info-panel opens"] = function(assert) {
-	let newPanel = infopanel.showPanel();
+	let newPanel = infopanel.showPanel("test");
 	if(newPanel instanceof panel.Panel) {
 		assert.pass("panel open");
 	} 

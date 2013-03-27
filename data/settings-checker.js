@@ -22,7 +22,6 @@
     
     function readStorageStatus(time) {
         self.port.on('storage-status', function(status) {
-//            sendInfoToPanel();   
             if(!status) {
                 console.log("readStatus: "+field.className);
                 sendInfoToPanel();                

@@ -16,24 +16,25 @@
         element.style.backgroundPosition = "100% 50%, 100% 50%";
         element.style.backgroundRepeat = "no-repeat";
 
-        element.addEventListener('click', function(e) {
-            element.className += " anchorclass"; 
-            console.log(document.querySelector(".anchorclass").className);
-
-            if(sitestatus.httpstatus == "HTTPS") {
-                if(element.value.length >0) {
-                    settingsChecker.isPasswordPeekedBefore(element, time);                
-                }
-            } else {
+        element.addEventListener('click', function(e) { 
+            if(sitestatus.httpstatus == "HTTPS" && element.value.length >0) {            
+                element.className += " anchorclass";
+                settingsChecker.isPasswordPeekedBefore(element, time);
+                closePanel();
+            } 
+            if(sitestatus.httpstatus !== "HTTPS") {
+                element.className += " anchorclass";
                 self.port.emit('info', 'This is insecure form.');
+                closePanel();                
             }
-            element.focus();    
-        });    
-
-		
-        element.addEventListener('mouseover', function(e) {
-            showPwd.showTooltip(element, 'click to show password');			
+            element.focus();
         });
+    }
+    
+    function closePanel() {
+        setTimeout(function() {
+            self.port.emit('close-panel');
+        }, 3000);        
     }
 
 }(window.fieldIcon = window.fieldIcon || {}));
