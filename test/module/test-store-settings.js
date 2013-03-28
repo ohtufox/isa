@@ -13,7 +13,7 @@ exports['test settings status is false first time'] = function(assert) {
     let url = testHelper.getHtmlFolder(module.uri) + '/test.html';
     tabs.open(url);
     tabs.on('ready', function(tab) {
-        worker = tab.attach({		
+        let worker = tab.attach({		
             contentScript: script
         });
     
@@ -32,7 +32,7 @@ exports['test settings status is true after first time'] = function(assert) {
     let url = testHelper.getHtmlFolder(module.uri) + '/test.html';
     tabs.open(url);
     tabs.on('ready', function(tab) {
-        worker = tab.attach({		
+        let worker = tab.attach({		
             contentScript: script
         });
     
