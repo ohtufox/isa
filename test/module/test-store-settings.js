@@ -8,40 +8,40 @@ let script = 'self.port.on("test-send-request", function() {'
             +'self.port.emit("used");});'
             +'';
             
-exports['test settings status is false first time'] = function(assert) {
-    assert.waitUntilDone();
-    let url = testHelper.getHtmlFolder(module.uri) + '/test.html';
-    tabs.open(url);
-    tabs.on('ready', function(tab) {
-        let worker = tab.attach({		
-            contentScript: script
-        });
+// exports['test settings status is false first time'] = function(assert) {
+    // assert.waitUntilDone();
+    // let url = testHelper.getHtmlFolder(module.uri) + '/test.html';
+    // tabs.open(url);
+    // tabs.on('ready', function(tab) {
+        // let worker = tab.attach({		
+            // contentScript: script
+        // });
     
-        storage.messaging(worker);
+        // storage.messaging(worker);
         
-        worker.port.emit('test-send-request');
-        worker.port.on("test-requested-status", function(status) {
-            assert.assert(!status);
-            assert.done();
-        });
-    });
-}
+        // worker.port.emit('test-send-request');
+        // worker.port.on("test-requested-status", function(status) {
+            // assert.assert(!status);
+            // assert.done();
+        // });
+    // });
+// }
 
-exports['test settings status is true after first time'] = function(assert) {
-    assert.waitUntilDone();
-    let url = testHelper.getHtmlFolder(module.uri) + '/test.html';
-    tabs.open(url);
-    tabs.on('ready', function(tab) {
-        let worker = tab.attach({		
-            contentScript: script
-        });
+// exports['test settings status is true after first time'] = function(assert) {
+    // assert.waitUntilDone();
+    // let url = testHelper.getHtmlFolder(module.uri) + '/test.html';
+    // tabs.open(url);
+    // tabs.on('ready', function(tab) {
+        // let worker = tab.attach({		
+            // contentScript: script
+        // });
     
-        storage.messaging(worker);
-        worker.port.emit('test-change-used');
-        worker.port.emit('test-send-request');
-        worker.port.on("test-requested-status", function(status) {
-            assert.assert(status);
-            assert.done();
-        });
-    });
-}
+        // storage.messaging(worker);
+        // worker.port.emit('test-change-used');
+        // worker.port.emit('test-send-request');
+        // worker.port.on("test-requested-status", function(status) {
+            // assert.assert(status);
+            // assert.done();
+        // });
+    // });
+// }
