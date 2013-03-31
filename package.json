@@ -1,10 +1,17 @@
 {
-    "name": "isa", 
+    "name": "ISA", 
     "license": "MPL 2.0", 
-    "author": "", 
-    "version": "0.1", 
-    "fullName": "isa", 
+    "author": "Ohtufox", 
+    "version": "0.9", 
+    "fullName": "Intelligent Security Advisor", 
     "id": "jid1-GM278EkQDBAX4A", 
-    "description": "a basic add-on",
-    "tests": "test/module/"
+    "description": "Security add-on that gives user information about the safety of their password field data.",
+    "tests": "test/module/",
+    "preferences": [{
+        "name": "passwordPeek",
+        "title": "Password peek is enabled",
+        "description": "While enabled, on the safe password fields an icon appears that allows you to peek your password.",
+        "type": "bool",
+        "value": true
+    }]
 }

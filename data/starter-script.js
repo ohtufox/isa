@@ -1,4 +1,4 @@
-self.port.on("status", function(status) {
-    intelligentSecurityAdvisor.init(status);
+self.port.on("data", function(status) {
+    intelligentSecurityAdvisor.init(data);
 });
 
