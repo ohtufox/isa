@@ -15,6 +15,7 @@
     };
 
     showPwd.fixElement = function(element, time) {
+        // XXX: Page with multiple password fields creates multiple calls with one fixElement() call?
         icon.add(element, time);
     };
 
@@ -22,6 +23,22 @@
         if(element.value.length >0) {
             element.title = msg;
         }
+    };
+
+    showPwd.addMouseDownPeekListener = function(element, target) {
+        element.addEventListener('mousedown', function(e) {
+            showPassword(target);
+            e.preventDefault();
+        });
+
+        element.addEventListener('mouseup', function(e) {
+            hidePassword(target);
+            e.preventDefault();
+        });
+
+        element.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
     };
 
     function showPassword(element){	
