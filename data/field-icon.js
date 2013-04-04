@@ -76,12 +76,26 @@
             imgi.style.top = rect.top + 'px';
         });
     }
+
     function displayPeekingEye(element, imgi) {
-        imgi.setAttribute('src', icons.eye);
-        imgi.setAttribute('src', icons.eye);
+        imgi.setAttribute('src', icons.eyeclosed);
         imgi.style.visibility = 'hidden';
         fieldIcon.displayOnFocus(element, imgi);
+        addEyeAnimation(imgi);
         showPwd.addMouseDownPeekListener(imgi, element);
+    }
+
+    function addEyeAnimation(element) {
+        element.addEventListener('mousedown', function(e) {
+            element.setAttribute('src', icons.eyeopen);
+        });
+
+        element.addEventListener('mouseup', function(e) {
+            element.setAttribute('src', icons.eyeclosed);
+        });
+        element.addEventListener('mouseleave', function(e) {
+            element.setAttribute('src', icons.eyeclosed);
+        });
     }
 
 }(window.fieldIcon = window.fieldIcon || {}));
