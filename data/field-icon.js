@@ -62,8 +62,8 @@
         // Position the icon
         let rect = element.getBoundingClientRect();
         let height = rect.bottom - rect.top;
-        imgi.style.left = rect.right-height + 'px';
-        imgi.style.top = rect.top + 'px';
+        imgi.style.left = window.pageXOffset + rect.right-height + 'px';
+        imgi.style.top = window.pageYOffset + rect.top + 'px';
         
         let size = height;
         imgi.style.width = size + 'px';
@@ -72,8 +72,8 @@
         window.addEventListener('resize', function(e) {
             let rect = element.getBoundingClientRect();
             let height = rect.bottom - rect.top;
-            imgi.style.left = rect.right-height + 'px';
-            imgi.style.top = rect.top + 'px';
+            imgi.style.left = window.pageXOffset + rect.right-height + 'px';
+            imgi.style.top = window.pageYOffset + rect.top + 'px';
         });
     }
 
