@@ -35,6 +35,9 @@
             hidePassword(target);
             e.preventDefault();
         });
+        element.addEventListener('mouseleave', function(e) {
+            hidePassword(target);
+        });
 
         element.addEventListener('contextmenu', function(e) {
             e.preventDefault();
