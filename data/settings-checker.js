@@ -6,13 +6,13 @@
         ignore = true;
     };
     
-    settingsChecker.isPasswordPeekedBefore = function(element, time) {
+    settingsChecker.isPasswordPeekedBefore = function(element, imgi) {
         if(!ignore) {
-            field = element;
             requestStorageStatus();
-            readStorageStatus(time);
+            readStorageStatus(element, imgi);
+            ignore = true;
         } else {
-            showPwd.peekPassword(element, time);
+            showPwd.peekPassword(element);
         }      	
     };
 
@@ -20,20 +20,17 @@
         self.port.emit('request-storage-status');
     }
     
-    function readStorageStatus(time) {
+    function readStorageStatus(element, imgi) {
         self.port.on('storage-status', function(status) {
             if(!status) {
-                console.log("readStatus: "+field.className);
-                sendInfoToPanel();
-                fieldIcon.closePanel();
-            } else {
-                showPwd.peekPassword(field, time);				
+                // TODO: Add some function that opens panels and adds anchorclass before sending to prevent repetition?
+                imgi.className = "anchorclass";
+                notifyAboutCleartext();
             }
         });
     }
-    
 
-    function sendInfoToPanel() {
+    function notifyAboutCleartext() {
         self.port.emit('info', 'Clicking icon again will show password in cleartext for 3 seconds.');
         self.port.emit('used');
     }

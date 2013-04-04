@@ -1,22 +1,21 @@
 (function(showPwd, finder, icon, undefined){
-    showPwd.peekPassword = function(element, time) {
+    showPwd.peekPassword = function(element) {
         if(element.value.length >0) {
             showPassword(element);
-            setTimeout(hidePassword, time, element);		
         }		
     };
 	
-    showPwd.fixPage = function(status, time) {
+    showPwd.fixPage = function(status) {
         fieldIcon.init(status);
         let passwordFields = finder.findPasswordFields();
         for(let i = 0; i < passwordFields.length; i++) {
-            showPwd.fixElement(passwordFields[i], time);
+            showPwd.fixElement(passwordFields[i]);
         }
     };
 
-    showPwd.fixElement = function(element, time) {
+    showPwd.fixElement = function(element) {
         // XXX: Page with multiple password fields creates multiple calls with one fixElement() call?
-        icon.add(element, time);
+        icon.add(element);
     };
 
     showPwd.showTooltip = function(element, msg) {
@@ -27,8 +26,8 @@
 
     showPwd.addMouseDownPeekListener = function(element, target) {
         element.addEventListener('mousedown', function(e) {
-            showPassword(target);
             e.preventDefault();
+            settingsChecker.isPasswordPeekedBefore(target, element);
         });
 
         element.addEventListener('mouseup', function(e) {
