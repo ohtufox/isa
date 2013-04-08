@@ -13,5 +13,11 @@
         "description": "While enabled, on the safe password fields an icon appears that allows you to peek your password.",
         "type": "bool",
         "value": true
+    },
+    {
+        "type": "file",
+        "name": "warningButton",
+        "title": "Select a warning button for missing SSL security.",
+        "value": "/data/"
     }]
 }
