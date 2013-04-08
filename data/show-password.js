@@ -44,7 +44,7 @@
     };
 
     function showPassword(element){	
-	    element.type = 'text';
+        element.type = 'text';
     }
 	
     function hidePassword(element){
