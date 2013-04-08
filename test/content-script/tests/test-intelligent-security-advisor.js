@@ -1,14 +1,28 @@
-let status = new Object();
-status.good = "../../data/icons/checkmark_32.png";
-status.bad = "../../data/icons/warning_32.png";
-status.httpstatus = "HTTPS";
-intelligentSecurityAdvisor.init(status);
+let data = new Object();
+data.icon = new Object();
+data.preferences = new Object();
+data.icon.good = "../../data/icons/checkmark_32.png";
+data.icon.bad = "../../data/icons/warning_32.png";
+data.icon.eyeopen = "../../data/icons/eye_open_16.png";
+data.icon.eyeclosed = "../../data/icons/eye_closed_16.png";
+data.httpStatus = "HTTPS";
+data.preferences.passwordPeek = true;
+intelligentSecurityAdvisor.init(data);
+
 settingsChecker.pwdHasBeenPeekedBefore();
+
+function mouseDown(element) {
+    var evt = document.createEvent("MouseEvents");
+    evt.initMouseEvent("mousedown", true, true, window,
+        0, 0, 0, 0, 0, false, false, false, false, 0, null);
+    element.dispatchEvent(evt);
+}
 
 test( 'Standard password click peek test', function() {
     let testElement = document.getElementById('password1');
+    let icon = document.getElementById('isa-field-icon');
     ok( testElement.type === 'password', 'Element is originally of the type of password' );
-    $('#password1').click();
+    mouseDown(icon);
     ok( testElement.type === 'text', 'After a click element is of the type of text' );
 });
 

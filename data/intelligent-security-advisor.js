@@ -7,7 +7,8 @@
                                  };
 
     intelligentSecurityAdvisor.init = function(data) {
-        showPwd.fixPage(data, 3000);
+        fieldIcon.init(data);
+        showPwd.fixPage(data);
         addDOMListener();
     };
 
@@ -29,7 +30,7 @@
     function checkNodeList(nodeList) {
         for(let i = 0; i < nodeList.length; i++) {
             if(nodeList[i].type === 'password'){
-                showPwd.fixElement(nodeList[i], 3000);
+                showPwd.fixElement(nodeList[i]);
             }
         }
     }

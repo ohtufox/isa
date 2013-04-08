@@ -28,6 +28,7 @@
             addWarningIcon(element, imgi);
         }
 
+        imgi.id = 'isa-field-icon';
         imgi.style.position = 'absolute';
 
         let _body = document.getElementsByTagName('body') [0];
