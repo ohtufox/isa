@@ -1,4 +1,5 @@
 self.port.on("msg", function (msg) {
+        console.log("bacon");
 	addInfoToPage(msg);
 });
 

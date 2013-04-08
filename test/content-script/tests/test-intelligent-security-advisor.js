@@ -20,8 +20,8 @@ function mouseDown(element) {
 
 test( 'Standard password click peek test', function() {
     let testElement = document.getElementById('password1');
-    let icon = document.getElementById('isa-field-icon');
     ok( testElement.type === 'password', 'Element is originally of the type of password' );
+    let icon = document.getElementById('isa-field-icon password1');
     mouseDown(icon);
     ok( testElement.type === 'text', 'After a click element is of the type of text' );
 });
@@ -33,7 +33,8 @@ asyncTest( 'JavaScript generated password field click peek test', function() {
     let testElement = document.getElementById('password4');
     ok( testElement.type === 'password', 'Element is originally of the type of password' );
     setTimeout(function() {
-        $('#password4').click();
+        let icon = document.getElementById('isa-field-icon password4');
+        mouseDown(icon);
         ok( testElement.type === 'text', 'After a click element is of the type of text' );
         start();
     }, 50);
@@ -47,7 +48,8 @@ asyncTest( 'JavaScript changed password field click peek test', function() {
     testElement.type = 'password';
     ok( testElement.type === 'password', 'Element is mutated to the type of password' );
     setTimeout(function() {
-        $('#password5').click();
+        let icon = document.getElementById('isa-field-icon password5');
+        mouseDown(icon);
         ok( testElement.type === 'text', 'After a click element is of the type of text' );
         start();
     }, 50);

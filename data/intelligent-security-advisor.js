@@ -23,6 +23,7 @@
     function checkMutations(mutations) {
         mutations.forEach(function(mutation) {
             let nodeList = mutation.addedNodes;
+            // XXX: nodeList remembers all old mutations as well, with multiple password field fixElement gets called too many times.
             checkNodeList(nodeList);
         });
     }

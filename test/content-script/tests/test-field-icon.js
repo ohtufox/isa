@@ -36,7 +36,7 @@ test( 'show password icon on HTTPS site', function() {
         initIconTest("HTTPS", true);
 	let element = document.getElementById('pwdfield1');
 	fieldIcon.add(element);
-        let icon = document.getElementById('isa-field-icon');
+        let icon = document.getElementById('isa-field-icon pwdfield1');
         ok( icon.style.visibility == "hidden", 'icon is not visible when the password field does not have focus')
         element.focus();
         // XXX: Breaks if test is opened in non-focused tab
