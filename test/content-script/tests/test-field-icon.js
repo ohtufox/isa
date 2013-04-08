@@ -16,6 +16,8 @@ function initIconTest(httpstatus, peek) {
     intelligentSecurityAdvisor.init(data);
 }
 
+initIconTest("HTTPS", true);
+
 // http://stackoverflow.com/a/9208880
 function mouseDown(element) {
     var evt = document.createEvent("MouseEvents");
@@ -33,7 +35,6 @@ function mouseUp(element) {
 }
 
 test( 'show password icon on HTTPS site', function() {
-        initIconTest("HTTPS", true);
 	let element = document.getElementById('pwdfield1');
 	fieldIcon.add(element);
         let icon = document.getElementById('isa-field-icon pwdfield1');
