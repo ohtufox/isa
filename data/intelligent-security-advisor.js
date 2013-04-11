@@ -30,9 +30,20 @@
 
     function checkNodeList(nodeList) {
         for(let i = 0; i < nodeList.length; i++) {
-            if(nodeList[i].type === 'password'){
-                showPwd.fixElement(nodeList[i]);
-            }
+            checkNode(nodeList[i]);
+        }
+    }
+
+    function checkNode(node){
+        checkChildNodes(node);
+        if(node.type === 'password'){
+            showPwd.fixElement(node);
+        }
+    }
+
+    function checkChildNodes(node) {
+        for (var i = 0; i < node.childNodes.length; i++) {
+            checkNode(node.childNodes[i]);
         }
     }
 
