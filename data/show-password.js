@@ -1,21 +1,21 @@
 (function(showPwd, finder, icon, undefined){
-    showPwd.peekPassword = function(element, time) {
+    showPwd.peekPassword = function(element) {
         if(element.value.length >0) {
             showPassword(element);
-            setTimeout(hidePassword, time, element);		
         }		
     };
 	
-    showPwd.fixPage = function(status, time) {
+    showPwd.fixPage = function(status) {
         fieldIcon.init(status);
         let passwordFields = finder.findPasswordFields();
         for(let i = 0; i < passwordFields.length; i++) {
-            showPwd.fixElement(passwordFields[i], time);
+            showPwd.fixElement(passwordFields[i]);
         }
     };
 
-    showPwd.fixElement = function(element, time) {
-        icon.add(element, time);
+    showPwd.fixElement = function(element) {
+        // XXX: Page with multiple password fields creates multiple calls with one fixElement() call?
+        icon.add(element);
     };
 
     showPwd.showTooltip = function(element, msg) {
@@ -24,8 +24,27 @@
         }
     };
 
+    showPwd.addMouseDownPeekListener = function(element, target) {
+        element.addEventListener('mousedown', function(e) {
+            e.preventDefault();
+            settingsChecker.isPasswordPeekedBefore(target, element);
+        });
+
+        element.addEventListener('mouseup', function(e) {
+            hidePassword(target);
+            e.preventDefault();
+        });
+        element.addEventListener('mouseleave', function(e) {
+            hidePassword(target);
+        });
+
+        element.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+    };
+
     function showPassword(element){	
-	    element.type = 'text';
+        element.type = 'text';
     }
 	
     function hidePassword(element){

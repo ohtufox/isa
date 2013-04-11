@@ -6,8 +6,9 @@
                                   subtree:true
                                  };
 
-    intelligentSecurityAdvisor.init = function(status) {
-        showPwd.fixPage(status, 3000);
+    intelligentSecurityAdvisor.init = function(data) {
+        fieldIcon.init(data);
+        showPwd.fixPage(data);
         addDOMListener();
     };
 
@@ -22,15 +23,27 @@
     function checkMutations(mutations) {
         mutations.forEach(function(mutation) {
             let nodeList = mutation.addedNodes;
+            // XXX: nodeList remembers all old mutations as well, with multiple password field fixElement gets called too many times.
             checkNodeList(nodeList);
         });
     }
 
     function checkNodeList(nodeList) {
         for(let i = 0; i < nodeList.length; i++) {
-            if(nodeList[i].type === 'password'){
-                showPwd.fixElement(nodeList[i], 3000);
-            }
+            checkNode(nodeList[i]);
+        }
+    }
+
+    function checkNode(node){
+        checkChildNodes(node);
+        if(node.type === 'password'){
+            showPwd.fixElement(node);
+        }
+    }
+
+    function checkChildNodes(node) {
+        for (var i = 0; i < node.childNodes.length; i++) {
+            checkNode(node.childNodes[i]);
         }
     }
 
