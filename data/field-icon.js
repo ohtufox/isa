@@ -12,7 +12,7 @@
     fieldIcon.closePanel = function() {
         setTimeout(function() {
             self.port.emit('close-panel');
-        }, 3000);        
+        }, 4000);        
     }
 
     fieldIcon.add = function(element) {
