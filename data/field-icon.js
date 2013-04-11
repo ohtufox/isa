@@ -15,23 +15,20 @@
         }, 4000);        
     }
 
-    function getStyle(el,styleProp) {
-        if (window.getComputedStyle) {
-            var y = document.defaultView.getComputedStyle(el,null).getPropertyValue(styleProp);
-        } else if (el.currentStyle) {
-            var y = el.currentStyle[styleProp];
-        }
-        return y;
-    }
-
-    function recursiveZIndexHell(field, icon) {
+    function recursiveZIndex(field, icon) {
         let element = field;
         while (element !== document.body) {
-            let zInd = getStyle ( element, "zIndex" );
-            alert(element + " " +  zInd);
-            if (zInd !== "") {
-                icon.style.zindex = zInd;
-                alert(zInd);
+            let zInd = document.defaultView.getComputedStyle(element,null).zIndex;
+            if (zInd !== "auto" && zInd !== "") {
+                // THANK YOU JAVASCRIPT.. http://jsfiddle.net/8yX85/2/
+                // Yes. This would still break if there are elements
+                // with z-index 10000001 and 100000003 where second one doesnt have
+                // password field and is on top of the first one.
+                if (parseFloat(zInd) < 10000000) {    
+                    icon.style.zIndex = parseFloat(zInd);
+                } else {
+                    icon.style.zIndex = parseFloat(zInd)+10000;
+                }
                 return;
             }
             element = element.parentNode;
@@ -40,7 +37,7 @@
 
     fieldIcon.add = function(element) {
         let imgi=document.createElement("img");
-        recursiveZIndexHell(element, imgi);
+        recursiveZIndex(element, imgi);
 
         addPanelListener(element, imgi);
         if (httpStatus == "HTTPS") {
