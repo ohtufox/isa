@@ -15,8 +15,32 @@
         }, 4000);        
     }
 
+    function getStyle(el,styleProp) {
+        if (window.getComputedStyle) {
+            var y = document.defaultView.getComputedStyle(el,null).getPropertyValue(styleProp);
+        } else if (el.currentStyle) {
+            var y = el.currentStyle[styleProp];
+        }
+        return y;
+    }
+
+    function recursiveZIndexHell(field, icon) {
+        let element = field;
+        while (element !== document.body) {
+            let zInd = getStyle ( element, "zIndex" );
+            alert(element + " " +  zInd);
+            if (zInd !== "") {
+                icon.style.zindex = zInd;
+                alert(zInd);
+                return;
+            }
+            element = element.parentNode;
+        }
+    }
+
     fieldIcon.add = function(element) {
         let imgi=document.createElement("img");
+        recursiveZIndexHell(element, imgi);
 
         addPanelListener(element, imgi);
         if (httpStatus == "HTTPS") {
