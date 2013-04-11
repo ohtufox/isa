@@ -56,7 +56,7 @@
                 if(httpStatus !== "HTTPS") {
                     imgi.className = "anchorclass";
                     e.preventDefault();
-                    self.port.emit('info', 'This is insecure form.');
+                    self.port.emit('info', 'unsecure-panel');
                     fieldIcon.closePanel();                
                 }
             });

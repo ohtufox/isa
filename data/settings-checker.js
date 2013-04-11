@@ -31,7 +31,7 @@
     }
 
     function notifyAboutCleartext() {
-        self.port.emit('info', 'Click-and-hold on icon will show password in cleartext.');
+        self.port.emit('info', 'secure-panel');
         self.port.emit('used');
     }
         
