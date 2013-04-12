@@ -1,7 +1,18 @@
 (function(settingsChecker, undefined) {
     let ignore = false;
     let field = '';
+    let httpsPageFound = false;
+    
 
+    self.port.on('https-page-exists', function() {
+        console.log("settingsChecker https-page-exists");
+        httpsPageFound = true;
+    });
+    
+    settingsChecker.httpsPageExists = function() {
+        return httpsPageFound;
+    };
+    
     settingsChecker.pwdHasBeenPeekedBefore = function() {
         ignore = true;
     };
@@ -34,5 +45,5 @@
         self.port.emit('info', 'secure-panel');
         self.port.emit('used');
     }
-        
+            
 } (window.settingsChecker = window.settingsChecker || {}));

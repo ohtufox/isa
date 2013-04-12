@@ -14,6 +14,15 @@
             self.port.emit('close-panel');
         }, 4000);        
     }
+    
+    fieldIcon.requestUnsecurePanel = function() {
+        if(settingsChecker.httpsPageExists()) {
+            self.port.emit('info', 'unsecure-panel-with-redirect');
+        } else {
+            self.port.emit('info', 'unsecure-panel');
+            fieldIcon.closePanel();        
+        }
+    }
 
     function recursiveZIndex(field, icon) {
         let element = field;
@@ -77,8 +86,9 @@
                 if(httpStatus !== "HTTPS") {
                     imgi.className = "anchorclass";
                     e.preventDefault();
-                    self.port.emit('info', 'unsecure-panel');
-                    fieldIcon.closePanel();                
+                    fieldIcon.requestUnsecurePanel();
+                    // self.port.emit('info', 'unsecure-panel');
+                    // fieldIcon.closePanel();                
                 }
             });
     }
