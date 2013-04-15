@@ -20,7 +20,7 @@
             self.port.emit('info', 'unsecure-panel-with-redirect');
         } else {
             self.port.emit('info', 'unsecure-panel');
-            fieldIcon.closePanel();        
+            //fieldIcon.closePanel();        
         }
     }
 
