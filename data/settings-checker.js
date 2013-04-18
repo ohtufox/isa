@@ -39,6 +39,8 @@
                 // TODO: Add some function that opens panels and adds anchorclass before sending to prevent repetition?
                 imgi.className = "anchorclass";
                 notifyAboutCleartext();
+            } else {
+                showPwd.peekPassword(element);
             }
         });
     }
