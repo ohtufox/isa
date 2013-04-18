@@ -73,17 +73,15 @@
             imgi.style.top = window.pageYOffset + rect.top + 'px';
         });
     }
-
+    
     function addPanelListener(element, imgi) {
-            imgi.addEventListener('click', function(e) { 
-                if(httpStatus !== "HTTPS") {
-                    imgi.className = "anchorclass";
-                    e.preventDefault();
-                    fieldIcon.requestUnsecurePanel();
-                    // self.port.emit('info', 'unsecure-panel');
-                    // fieldIcon.closePanel();                
-                }
-            });
+        imgi.addEventListener('click', function(e) { 
+            if(httpStatus !== "HTTPS") {
+                imgi.className = "anchorclass";
+                e.preventDefault();
+                fieldIcon.requestUnsecurePanel();
+            }
+        });
     }
 
    function addWarningIcon(element, imgi) {
