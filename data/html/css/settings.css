@@ -10,3 +10,9 @@ body {
     border-radius: 5px; 
     background-color: #e0e0e0
 }
+
+.thumb {
+    height: 32px;
+    border: 1px solid #000;
+    margin: 10px 5px 0 0;
+}

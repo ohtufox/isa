@@ -75,7 +75,7 @@
     }
     
     function addPanelListener(element, imgi) {
-        imgi.addEventListener('click', function(e) { 
+        imgi.addEventListener('mousedown', function(e) { 
             if(httpStatus !== "HTTPS") {
                 imgi.className = "anchorclass";
                 e.preventDefault();
@@ -85,7 +85,13 @@
     }
 
    function addWarningIcon(element, imgi) {
+        imgi.style.visibility = 'hidden';
+        if(preferences.iconWarning != undefined) {
+            imgi.setAttribute('src', preferences.iconWarning);
+        } else {
             imgi.setAttribute('src', icons.bad);
+        }
+        displayOnFocus(element, imgi);
    }
 
    function  displayOnFocus(element, target) {
