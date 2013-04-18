@@ -4,10 +4,15 @@
     let httpsPageFound = false;
     
 
-    self.port.on('https-page-exists', function() {
-        console.log("settingsChecker https-page-exists");
-        httpsPageFound = true;
-    });
+    //if(!ignore) checkHttpsPage();
+
+    
+    settingsChecker.checkHttpsPage = function() {
+        self.port.on('https-page-exists', function() {
+            console.log("settingsChecker https-page-exists");
+            httpsPageFound = true;
+        });
+    };
     
     settingsChecker.httpsPageExists = function() {
         return httpsPageFound;

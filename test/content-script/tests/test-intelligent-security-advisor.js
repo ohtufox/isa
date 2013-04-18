@@ -7,8 +7,9 @@ data.icon.eyeopen = "../../data/icons/eye_open_16.png";
 data.icon.eyeclosed = "../../data/icons/eye_closed_16.png";
 data.httpStatus = "HTTPS";
 data.preferences.passwordPeek = true;
-intelligentSecurityAdvisor.init(data);
 
+
+intelligentSecurityAdvisor.init(data);
 settingsChecker.pwdHasBeenPeekedBefore();
 
 function mouseDown(element) {

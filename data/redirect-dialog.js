@@ -4,7 +4,7 @@ self.port.on("add-redirect-dialog", function() {
 
 function addDialogToPage() {
 	let area = document.getElementById("infoarea");
-	let element = document.createElement("p");
+	let element = document.createElement("button");
     element.addEventListener('click', function() {
         self.port.emit('request-redirect');
     });
