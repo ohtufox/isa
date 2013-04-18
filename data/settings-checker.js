@@ -4,9 +4,6 @@
     let httpsPageFound = false;
     
 
-    //if(!ignore) checkHttpsPage();
-
-    
     settingsChecker.checkHttpsPage = function() {
         self.port.on('https-page-exists', function() {
             console.log("settingsChecker https-page-exists");

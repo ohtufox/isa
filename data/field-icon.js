@@ -8,19 +8,12 @@
         httpStatus = data.httpStatus;
         preferences = data.preferences;
     }
-
-    fieldIcon.closePanel = function() {
-        setTimeout(function() {
-            self.port.emit('close-panel');
-        }, 4000);        
-    }
     
     fieldIcon.requestUnsecurePanel = function() {
         if(settingsChecker.httpsPageExists()) {
             self.port.emit('info', 'unsecure-panel-with-redirect');
         } else {
             self.port.emit('info', 'unsecure-panel');
-            //fieldIcon.closePanel();        
         }
     }
 
