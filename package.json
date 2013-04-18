@@ -13,5 +13,12 @@
         "description": "While enabled, on the safe password fields an icon appears that allows you to peek your password.",
         "type": "bool",
         "value": true
+    },
+    {
+        "name": "SSLRedirect",
+        "title": "SSL redirect is enabled",
+        "description": "While enabled, if secure version of unsecure page exists, you are redirected to it",
+        "type": "bool",
+        "value": false
     }]
 }

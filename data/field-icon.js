@@ -8,11 +8,13 @@
         httpStatus = data.httpStatus;
         preferences = data.preferences;
     }
-
-    fieldIcon.closePanel = function() {
-        setTimeout(function() {
-            self.port.emit('close-panel');
-        }, 4000);        
+    
+    fieldIcon.requestUnsecurePanel = function() {
+        if(settingsChecker.httpsPageExists()) {
+            self.port.emit('info', 'unsecure-panel-with-redirect');
+        } else {
+            self.port.emit('info', 'unsecure-panel');
+        }
     }
 
     function recursiveZIndex(field, icon) {
@@ -71,16 +73,15 @@
             imgi.style.top = window.pageYOffset + rect.top + 'px';
         });
     }
-
+    
     function addPanelListener(element, imgi) {
-            imgi.addEventListener('click', function(e) { 
-                if(httpStatus !== "HTTPS") {
-                    imgi.className = "anchorclass";
-                    e.preventDefault();
-                    self.port.emit('info', 'unsecure-panel');
-                    fieldIcon.closePanel();                
-                }
-            });
+        imgi.addEventListener('click', function(e) { 
+            if(httpStatus !== "HTTPS") {
+                imgi.className = "anchorclass";
+                e.preventDefault();
+                fieldIcon.requestUnsecurePanel();
+            }
+        });
     }
 
    function addWarningIcon(element, imgi) {

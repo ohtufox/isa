@@ -1,7 +1,20 @@
 (function(settingsChecker, undefined) {
     let ignore = false;
     let field = '';
+    let httpsPageFound = false;
+    
 
+    settingsChecker.checkHttpsPage = function() {
+        self.port.on('https-page-exists', function() {
+            console.log("settingsChecker https-page-exists");
+            httpsPageFound = true;
+        });
+    };
+    
+    settingsChecker.httpsPageExists = function() {
+        return httpsPageFound;
+    };
+    
     settingsChecker.pwdHasBeenPeekedBefore = function() {
         ignore = true;
     };
@@ -26,6 +39,8 @@
                 // TODO: Add some function that opens panels and adds anchorclass before sending to prevent repetition?
                 imgi.className = "anchorclass";
                 notifyAboutCleartext();
+            } else {
+                showPwd.peekPassword(element);
             }
         });
     }
@@ -34,5 +49,5 @@
         self.port.emit('info', 'secure-panel');
         self.port.emit('used');
     }
-        
+            
 } (window.settingsChecker = window.settingsChecker || {}));
