@@ -15,6 +15,13 @@
         "value": true
     },
     {
+        "name": "showIcons",
+        "title": "Always show eye icon on https pages",
+        "description": "Show icon on https pages even if target page is unknown (will work only if password peek is enabled).",
+        "type": "bool",
+        "value": false
+    }, 
+    {
         "name": "SSLRedirect",
         "title": "SSL redirect is enabled",
         "description": "While enabled, if secure version of unsecure page exists, you are redirected to it",

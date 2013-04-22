@@ -1,7 +1,8 @@
 (function(settingsMenu, undefined) {
     const SETTING_ELEMENTS = {
         passwordPeek : document.getElementById('passwordPeek'),
-        iconWarning : document.getElementById('iconWarning')
+        iconWarning : document.getElementById('iconWarning'),
+        showIcons : document.getElementById('showIcons')
     };
     const ELEMENT_HANDLERS = {
         checkbox : handleCheckbox,
