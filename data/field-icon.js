@@ -86,12 +86,17 @@
 
    function addWarningIcon(element, imgi) {
         imgi.style.visibility = 'hidden';
+        imgi.alt = 'form is unsecure, click icon for more info';
         if(preferences.iconWarning != undefined) {
             imgi.setAttribute('src', preferences.iconWarning);
         } else {
             imgi.setAttribute('src', icons.bad);
         }
         displayOnFocus(element, imgi);
+        let previousElement = previousField(element);
+        if (previousElement !== undefined) {
+            displayOnFocus(previousElement, imgi);
+        }
    }
 
    function  displayOnFocus(element, target) {
@@ -102,6 +107,10 @@
         element.addEventListener('blur', function(e) {
             target.style.visibility = "hidden";
         });
+
+        if (document.activeElement === element) {
+            target.style.visibility = "visible";
+        }
     }
 
     function addPeekingEye(element, imgi) {
@@ -123,6 +132,17 @@
         element.addEventListener('mouseleave', function(e) {
             element.setAttribute('src', icons.eyeclosed);
         });
+    }
+
+    function previousField(element) {
+        let fields = document.getElementsByTagName("input");
+        for (let i = 0; i < fields.length; i++) {
+            if (fields[i] === element && i > 0) {
+                if (element.form === fields[i-1].form) {
+                    return fields[i-1];
+                }
+            }
+        }
     }
 
 }(window.fieldIcon = window.fieldIcon || {}));
