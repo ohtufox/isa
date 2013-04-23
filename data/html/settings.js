@@ -57,7 +57,16 @@
               document.getElementById('iconWarningList').insertBefore(span, null);
     }
 
+    let iconWarning = document.getElementById('iconWarning');
+    iconWarning.onchange = function(e){
+        uploadFile(iconWarning);
+    };
+
     function getFileContents(element) {
+        return element.data;
+    }
+    
+    function uploadFile(element) {
         var files = element.files; // FileList object
 
         for (var i = 0, f; f = files[i]; i++) {
@@ -68,29 +77,24 @@
           if (!f.type.match('image.*')) {
             continue;
           }
-          var reader = new FileReader();
+         let reader = new FileReader();
          reader.onload = (function(theFile) {
             return function(e) {
             //e.target.result // tätä voi suoraan käyttää src sisällä
               // Render thumbnail.
-              var span = document.createElement('span');
+              let span = document.createElement('span');
               span.innerHTML = ['<img class="thumb" src="', e.target.result,
                                 '" title="', escape(theFile.name), '"/>'].join('');
 
-              var out = document.getElementById('iconWarningList');
+              let out = document.getElementById('iconWarningList');
               if (out.childNodes.length > 0) {
                 out.removeChild(out.childNodes[0]);
               }
               out.appendChild(span, null);
-
+              element.data = e.target.result;
             };
           })(f);
           reader.readAsDataURL(f);
-        while (reader.readyState !== 2) {
-            // TODO: find a way to block until read is complete..
-            alert("uploading image..");
-        }
-        return reader.result;
         }
     }
 
