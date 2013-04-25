@@ -38,6 +38,14 @@
     }
 
     fieldIcon.add = function(element) {
+        if(preferences.iconWarning != undefined) {
+            icons.bad = preferences.iconWarning;
+        }
+        if(preferences.iconShow != undefined) {
+            icons.eyeclosed = preferences.iconShow;
+            icons.eyeopen = preferences.iconShow;
+        }
+
         let imgi=document.createElement("img");
         recursiveZIndex(element, imgi);
 
@@ -87,11 +95,7 @@
    function addWarningIcon(element, imgi) {
         imgi.style.visibility = 'hidden';
         imgi.title = 'form is unsecure, click icon for more info';
-        if(preferences.iconWarning != undefined) {
-            imgi.setAttribute('src', preferences.iconWarning);
-        } else {
-            imgi.setAttribute('src', icons.bad);
-        }
+        imgi.setAttribute('src', icons.bad);
         displayOnFocus(element, imgi);
         let previousElement = previousField(element);
         if (previousElement !== undefined) {

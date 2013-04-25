@@ -16,8 +16,15 @@
                 </li>
                 <li>
                     <label>Warning icon</label>
-                    <input type="file" id="iconWarning" name="iconWarning" />
+                    <input type="file" id="iconWarning" name="iconWarning" style="display: none" />
+                    <input type="button" value="Browse..." onclick="document.getElementById('iconWarning').click();" />
                     <output id="iconWarningList"></output>
+                </li>
+                <li>
+                    <label>Show password icon</label>
+                    <input type="file" id="iconShow" name="iconShow" style="display: none" />
+                    <input type="button" value="Browse..." onclick="document.getElementById('iconShow').click();" />
+                    <output id="iconShowList"></output>
                 </li>
             </ul>
             <button id="settingsSubmit" type="button">Save settings</button>

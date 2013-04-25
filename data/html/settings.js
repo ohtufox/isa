@@ -1,7 +1,8 @@
 (function(settingsMenu, undefined) {
     const SETTING_ELEMENTS = {
         passwordPeek : document.getElementById('passwordPeek'),
-        iconWarning : document.getElementById('iconWarning')
+        iconWarning : document.getElementById('iconWarning'),
+        iconShow : document.getElementById('iconShow')
     };
     const ELEMENT_HANDLERS = {
         checkbox : handleCheckbox,
@@ -54,12 +55,16 @@
               var span = document.createElement('span');
               span.innerHTML = ['<img class="thumb" src="', value,
                                 '" title="', "icon", '"/>'].join('');
-              document.getElementById('iconWarningList').insertBefore(span, null);
+              document.getElementById(element.name + 'List').insertBefore(span, null);
     }
 
     let iconWarning = document.getElementById('iconWarning');
     iconWarning.onchange = function(e){
         uploadFile(iconWarning);
+    };
+    let iconShow = document.getElementById('iconShow');
+    iconShow.onchange = function(e){
+        uploadFile(iconShow);
     };
 
     function getFileContents(element) {
@@ -68,25 +73,23 @@
     
     function uploadFile(element) {
         var files = element.files; // FileList object
+        let out = document.getElementById(element.name+"List");
 
         for (var i = 0, f; f = files[i]; i++) {
           if (f.size > 1000000) {
-              // We probably don't want bunch of 6GB images.
+              out.innerHTML = "file must be under 1MB";
               continue;
-          }
-          if (!f.type.match('image.*')) {
+          } else if (!f.type.match('image.*')) {
+            out.innerHTML = "file must be an image";
             continue;
           }
          let reader = new FileReader();
          reader.onload = (function(theFile) {
             return function(e) {
-            //e.target.result // tätä voi suoraan käyttää src sisällä
               // Render thumbnail.
               let span = document.createElement('span');
               span.innerHTML = ['<img class="thumb" src="', e.target.result,
                                 '" title="', escape(theFile.name), '"/>'].join('');
-
-              let out = document.getElementById('iconWarningList');
               if (out.childNodes.length > 0) {
                 out.removeChild(out.childNodes[0]);
               }
