@@ -9,15 +9,16 @@
         fieldIcon.init(status);
         let passwordFields = finder.findPasswordFields();
         for(let i = 0; i < passwordFields.length; i++) {
+            showPwd.checkTarget(passwordFields[i]);
             showPwd.fixElement(passwordFields[i]);
         }
     };
 
-    showPwd.fixElement = function(element) {
+    showPwd.checkTarget  = function(element) {
         self.port.emit('fieldcheck', element.form.action);
     };
 
-    showPwd.checkTarget  = function(element) {
+    showPwd.fixElement = function(element) {
         self.port.on('fieldchecked', function(payload) {
             icon.add(element, payload);
         });
