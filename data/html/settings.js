@@ -78,9 +78,11 @@
         for (var i = 0, f; f = files[i]; i++) {
           if (f.size > 1000000) {
               out.innerHTML = "file must be under 1MB";
+              element.data = undefined;
               continue;
           } else if (!f.type.match('image.*')) {
             out.innerHTML = "file must be an image";
+            element.data = undefined;
             continue;
           }
          let reader = new FileReader();
