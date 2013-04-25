@@ -2,14 +2,17 @@
     const SETTING_ELEMENTS = {
         passwordPeek : document.getElementById('passwordPeek'),
         iconWarning : document.getElementById('iconWarning'),
-        iconShow : document.getElementById('iconShow')
+        iconShow : document.getElementById('iconShow'),
+        theme : document.getElementById('theme')
     };
     const ELEMENT_HANDLERS = {
         checkbox : handleCheckbox,
+        select : handleSelect,
         file : handleFile
     };
     const VALUE_COLLECTORS = {
         checkbox : getCheckboxValue,
+        select : getSelectValue,
         file : getFileContents
     };
 
@@ -17,6 +20,9 @@
         for(let setting in settings){
             let element = SETTING_ELEMENTS[setting]; // input element
             let value = settings[setting]; // getterin palauttama data
+                console.log(element.type);
+                
+
             ELEMENT_HANDLERS[element.type](element, value); // mitä datalla tehdään?
         }
         fixSubmit();
@@ -49,6 +55,13 @@
 
     function getCheckboxValue(element) {
         return element.checked;
+    }
+    function handleSelect(element, value) {
+        element.value = value;
+    }
+
+    function getSelectValue(element) {
+        return element.value;
     }
 
     function handleFile(element, value) {

@@ -20,5 +20,22 @@
         "description": "While enabled, if secure version of unsecure page exists, you are redirected to it",
         "type": "bool",
         "value": false
+    },
+    {
+        "name": "theme",
+        "title": "Theme",
+        "description": "Choose a theme for the addon.",
+        "type": "menulist",
+        "value": 0,
+        "options": [
+        {
+            "value": "0",
+            "label": "Theme 1"
+        },
+        {
+            "value": "1",
+            "label": "Theme 2"
+        }
+        ]
     }]
 }
