@@ -1,21 +1,31 @@
 (function(intelligentSecurityAdvisor, showPwd, undefined) {
-    
+
     const DOM_LISTENER_TARGET = document.body;
     const DOM_LISTENER_OPTIONS = {
-                                  childList:true,
-                                  subtree:true
-                                 };
+        childList:true,
+subtree:true
+    };
 
     intelligentSecurityAdvisor.init = function(data) {
+        if(document.readyState === 'complete') {
+            initialize(data);
+        } else {
+            setTimeout(function() {
+                initialize(data);
+            }, 1500);
+        }
+    };
+
+    function initialize(data) {
         fieldIcon.init(data);
         showPwd.fixPage(data);
         addDOMListener();
-    };
+    }
 
     function addDOMListener() {
         let MutationObserver = window.MutationObserver;
         let observer = new MutationObserver(function(mutations) {
-                checkMutations(mutations);
+            checkMutations(mutations);
         });
         observer.observe(DOM_LISTENER_TARGET, DOM_LISTENER_OPTIONS);
     }
