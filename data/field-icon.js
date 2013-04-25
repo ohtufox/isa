@@ -37,7 +37,8 @@
         }
     }
 
-    fieldIcon.add = function(element) {
+    fieldIcon.add = function(element, payload) {
+        alert(payload);
         let imgi=document.createElement("img");
         recursiveZIndex(element, imgi);
 
@@ -86,7 +87,7 @@
 
    function addWarningIcon(element, imgi) {
         imgi.style.visibility = 'hidden';
-        imgi.alt = 'form is unsecure, click icon for more info';
+        imgi.title = 'form is unsecure, click icon for more info';
         if(preferences.iconWarning != undefined) {
             imgi.setAttribute('src', preferences.iconWarning);
         } else {

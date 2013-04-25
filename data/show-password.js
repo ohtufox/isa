@@ -9,15 +9,21 @@
         fieldIcon.init(status);
         let passwordFields = finder.findPasswordFields();
         for(let i = 0; i < passwordFields.length; i++) {
+            showPwd.checkTarget(passwordFields[i]);
             showPwd.fixElement(passwordFields[i]);
         }
     };
 
-    showPwd.fixElement = function(element) {
-        // XXX: Page with multiple password fields creates multiple calls with one fixElement() call?
-        icon.add(element);
+    showPwd.checkTarget  = function(element) {
+        self.port.emit('fieldcheck', element.form.action);
     };
 
+    showPwd.fixElement = function(element) {
+        self.port.on('fieldchecked', function(payload) {
+            icon.add(element, payload);
+        });
+    };
+    
     showPwd.showTooltip = function(element, msg) {
         if(element.value.length >0) {
             element.title = msg;

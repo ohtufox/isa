@@ -1,5 +1,4 @@
 body {
-    background-color: #ffc000; 
     font-size: 12pt; color: black
 }
 
@@ -7,7 +6,7 @@ body {
     padding: 2px;
     border-width: 1px; 
     border: solid; 
-    border-radius: 5px; 
+    border-radius: 2px; 
     background-color: #e0e0e0
 }
 
