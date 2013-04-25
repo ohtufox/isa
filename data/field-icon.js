@@ -37,7 +37,8 @@
         }
     }
 
-    fieldIcon.add = function(element) {
+    fieldIcon.add = function(element, payload) {
+        alert(payload);
         let imgi=document.createElement("img");
         recursiveZIndex(element, imgi);
 
