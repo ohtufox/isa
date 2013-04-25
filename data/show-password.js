@@ -8,18 +8,24 @@
     showPwd.fixPage = function(status) {
         let passwordFields = finder.findPasswordFields();
         for(let i = 0; i < passwordFields.length; i++) {
-            showPwd.checkTarget(passwordFields[i]);
+            showPwd.checkTarget(passwordFields[i], i);
             showPwd.fixElement(passwordFields[i]);
         }
     };
 
-    showPwd.checkTarget  = function(element) {
-        self.port.emit('fieldcheck', element.form.action);
+    showPwd.checkTarget  = function(element, index) {
+        payload=new Object();
+        payload.action = element.form.action;
+        payload.index = index;
+        console.log("SEND: " + JSON.stringify(payload));
+        self.port.emit('fieldcheck', payload);
     };
 
     showPwd.fixElement = function(element) {
         self.port.on('fieldchecked', function(payload) {
-            icon.add(element, payload);
+            console.log("RECV: " + JSON.stringify(payload));
+            let passwordFields = finder.findPasswordFields();
+            icon.add(passwordFields[payload.index], payload);
         });
     };
     
