@@ -37,7 +37,7 @@
         }
     }
 
-    fieldIcon.add = function(element) {
+    fieldIcon.add = function(element, payload) {
         if(preferences.iconWarning != undefined) {
             icons.bad = preferences.iconWarning;
         }

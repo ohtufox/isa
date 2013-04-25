@@ -13,10 +13,15 @@
     };
 
     showPwd.fixElement = function(element) {
-        // XXX: Page with multiple password fields creates multiple calls with one fixElement() call?
-        icon.add(element);
+        self.port.emit('fieldcheck', element.form.action);
     };
 
+    showPwd.checkTarget  = function(element) {
+        self.port.on('fieldchecked', function(payload) {
+            icon.add(element, payload);
+        });
+    };
+    
     showPwd.showTooltip = function(element, msg) {
         if(element.value.length >0) {
             element.title = msg;
