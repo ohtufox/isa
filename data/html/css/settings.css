@@ -13,5 +13,23 @@ body {
 .thumb {
     height: 32px;
     border: 1px solid #000;
-    margin: 10px 5px 0 0;
+}
+
+label {
+    position: absolute;
+    left: 50px;
+}
+
+input {
+    position: absolute;
+    left: 450px;
+}
+
+output {
+    position: absolute;
+    left: 600px;
+}
+
+.thumbnail {
+    height: 32px;
 }

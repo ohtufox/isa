@@ -6,7 +6,6 @@
     };
 	
     showPwd.fixPage = function(status) {
-        fieldIcon.init(status);
         let passwordFields = finder.findPasswordFields();
         for(let i = 0; i < passwordFields.length; i++) {
             showPwd.checkTarget(passwordFields[i], i);

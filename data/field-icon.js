@@ -26,7 +26,7 @@
                 // Yes. This would still break if there are elements
                 // with z-index 10000001 and 100000003 where second one doesnt have
                 // password field and is on top of the first one.
-                if (parseFloat(zInd) < 10000000) {    
+                if (parseFloat(zInd) < 10000000) {
                     icon.style.zIndex = parseFloat(zInd);
                 } else {
                     icon.style.zIndex = parseFloat(zInd)+10000;
@@ -37,7 +37,15 @@
         }
     }
 
-    fieldIcon.add = function(element, payload) {
+    fieldIcon.add = function(element) {
+        if(preferences.iconWarning != undefined) {
+            icons.bad = preferences.iconWarning;
+        }
+        if(preferences.iconShow != undefined) {
+            icons.eyeclosed = preferences.iconShow;
+            icons.eyeopen = preferences.iconShow;
+        }
+
         let imgi=document.createElement("img");
         recursiveZIndex(element, imgi);
 
@@ -75,7 +83,7 @@
     }
     
     function addPanelListener(element, imgi) {
-        imgi.addEventListener('mousedown', function(e) { 
+        imgi.addEventListener('mousedown', function(e) {
             if(httpStatus !== "HTTPS") {
                 imgi.className = "anchorclass";
                 e.preventDefault();
@@ -87,11 +95,7 @@
    function addWarningIcon(element, imgi) {
         imgi.style.visibility = 'hidden';
         imgi.title = 'form is unsecure, click icon for more info';
-        if(preferences.iconWarning != undefined) {
-            imgi.setAttribute('src', preferences.iconWarning);
-        } else {
-            imgi.setAttribute('src', icons.bad);
-        }
+        imgi.setAttribute('src', icons.bad);
         displayOnFocus(element, imgi);
         let previousElement = previousField(element);
         if (previousElement !== undefined) {
@@ -99,7 +103,7 @@
         }
    }
 
-   function  displayOnFocus(element, target) {
+   function displayOnFocus(element, target) {
         element.addEventListener('focus', function(e) {
             target.style.visibility = "visible";
         });

@@ -41,12 +41,12 @@ test( 'show password icon on HTTPS site', function() {
         ok( icon.style.visibility == "hidden", 'icon is not visible when the password field does not have focus')
         element.focus();
         // XXX: Breaks if test is opened in non-focused tab
-/*        ok( icon.style.visibility == "visible", 'icon is visible to the user when password field has focus')
+    //    ok( icon.style.visibility == "visible", 'icon is visible to the user when password field has focus')
 	ok( endsWith(icon.src, 'eye_closed_16.png'), 'focused field has closed eye icon on secure site' );
         mouseDown(icon);
-        ok( icon.style.visibility == "visible", 'icon is visible to user while icon is being clicked')
+    //    ok( icon.style.visibility == "visible", 'icon is visible to user while icon is being clicked')
 	ok( endsWith(icon.src, 'eye_open_16.png'), 'while the icon is being clicked an open eye icon is displayed' );
         mouseUp(icon);
 	ok( endsWith(icon.src, 'eye_closed_16.png'), 'icon changes back to closed eye when mouse button is released' );
-    */
+    
 });
