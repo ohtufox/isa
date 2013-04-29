@@ -2,6 +2,7 @@
     const SETTING_ELEMENTS = {
         passwordPeek : document.getElementById('passwordPeek'),
         disableUndetermined : document.getElementById('disableUndetermined'),
+        enableCustomIcons : document.getElementById('enableCustomIcons'),
         iconWarning : document.getElementById('iconWarning'),
         iconShow : document.getElementById('iconShow')
     };
@@ -66,6 +67,13 @@
     let iconShow = document.getElementById('iconShow');
     iconShow.onchange = function(e){
         uploadFile(iconShow);
+    };
+    let customIcons = document.getElementById('customIcons');
+    let enableCustomIcons = document.getElementById('enableCustomIcons');
+    console.log(customIcons.hidden + " " + enableCustomIcons.checked + " " + enableCustomIcons.value);
+    customIcons.hidden = !enableCustomIcons.checked;
+    enableCustomIcons.onchange = function(e){
+        customIcons.hidden = !enableCustomIcons.checked;
     };
 
     function getFileContents(element) {
