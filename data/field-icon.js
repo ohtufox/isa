@@ -54,6 +54,8 @@
         addPanelListener(element, imgi);
         if (httpStatus == "HTTPS") {
             switch (payload.state) {
+                case undefined:
+                    return;
                 case "TARGET_UNDETERMINED":
                 case "No info available":
                     if(preferences.disableUndetermined) {

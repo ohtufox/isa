@@ -18,17 +18,24 @@
 
     showPwd.checkTarget  = function(element, index) {
         payload=new Object();
-        payload.action = element.form.action;
+        if (element.form == undefined) {
+            // password field outside a form.
+            return;
+        } else {
+            payload.action = element.form.action;
+        }
         payload.index = index;
         console.log("SEND: " + JSON.stringify(payload));
         self.port.emit('fieldcheck', payload);
     };
 
-    self.port.on('fieldchecked', function(payload) {
-        console.log("RECV: " + JSON.stringify(payload));
-        let passwordFields = finder.findPasswordFields();
-        icon.add(passwordFields[payload.index], payload);
-    });
+    showPwd.listenForStates = function() {
+        self.port.on('fieldchecked', function(payload) {
+            console.log("RECV: " + JSON.stringify(payload));
+            let passwordFields = finder.findPasswordFields();
+            icon.add(passwordFields[payload.index], payload);
+        });
+    };
     
     showPwd.showTooltip = function(element, msg) {
         if(element.value.length >0) {
