@@ -3,9 +3,6 @@
     fieldFinder.findPasswordFields = function() {
         let inputElements = findInputFields();
         let passwordFields = getPasswordFieldsFromInputs(inputElements);
-//        if (passwordFields[0])
-//           self.port.emit('target-address', passwordFields[0].form.action);
-//           self.port.emit('target-address', passwordFields);
         return passwordFields;
     };
 
