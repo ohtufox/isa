@@ -16,6 +16,16 @@
             self.port.emit('info', 'unsecure-panel');
         }
     }
+   
+    fieldIcon.add = function(element, payload) {
+        let imgi=document.createElement("img");
+        checkPreferences();
+        recursiveZIndex(element, imgi);
+        addPanelListener(element, imgi);
+        checkSecurityStatus(element, payload, imgi);
+        positionIcon(element, imgi);
+        addResizeListener(element, imgi);
+    }
 
     function recursiveZIndex(field, icon) {
         let element = field;
@@ -37,7 +47,7 @@
         }
     }
 
-    fieldIcon.add = function(element, payload) {
+    function checkPreferences() {
         if(preferences.enableCustomIcons) {
             if(preferences.iconWarning != undefined) {
                 icons.bad = preferences.iconWarning;                
@@ -48,10 +58,9 @@
             }
         }
 
-        let imgi=document.createElement("img");
-        recursiveZIndex(element, imgi);
-
-        addPanelListener(element, imgi);
+    }
+    
+    function checkSecurityStatus(element, payload, imgi) {
         if (httpStatus == "HTTPS") {
             switch (payload.state) {
                 case undefined:
@@ -75,8 +84,10 @@
             }
         } else {
             addWarningIcon(element, imgi);
-        }
-
+        }    
+    }
+    
+    function positionIcon(element, imgi) {
         imgi.id = 'isa-field-icon ' + element.id;
         imgi.style.position = 'absolute';
 
@@ -91,7 +102,9 @@
         
         let size = height;
         imgi.style.width = size + 'px';
-
+    }
+    
+    function addResizeListener(element, imgi) {
         window.addEventListener('resize', function(e) {
             let rect = element.getBoundingClientRect();
             let height = rect.bottom - rect.top;
