@@ -38,12 +38,14 @@
     }
 
     fieldIcon.add = function(element, payload) {
-        if(preferences.iconWarning != undefined) {
-            icons.bad = preferences.iconWarning;
-        }
-        if(preferences.iconShow != undefined) {
-            icons.eyeclosed = preferences.iconShow;
-            icons.eyeopen = preferences.iconShow;
+        if(preferences.enableCustomIcons) {
+            if(preferences.iconWarning != undefined) {
+                icons.bad = preferences.iconWarning;
+            }
+            if(preferences.iconShow != undefined) {
+                icons.eyeclosed = preferences.iconShow;
+                icons.eyeopen = preferences.iconShow;
+            }
         }
 
         let imgi=document.createElement("img");
@@ -51,9 +53,23 @@
 
         addPanelListener(element, imgi);
         if (httpStatus == "HTTPS") {
-            // Secure site, display clickable eye icon.
-            if(preferences.passwordPeek) {
-                addPeekingEye(element, imgi);
+            switch (payload.state) {
+                case "TARGET_UNDETERMINED":
+                case "No info available":
+                    if(preferences.disableUndetermined) {
+                        return;
+                    }
+                case "Secure":
+                    if(preferences.passwordPeek) {
+                        addPeekingEye(element, imgi);
+                    } else {
+                        return;
+                    }
+                    break;
+                case "Insecure":
+                case "Broken state":
+                    addWarningIcon(element, imgi);
+                    break;
             }
         } else {
             addWarningIcon(element, imgi);
