@@ -1,6 +1,7 @@
 (function(settingsMenu, undefined) {
     const SETTING_ELEMENTS = {
         passwordPeek : document.getElementById('passwordPeek'),
+        disableUndetermined : document.getElementById('disableUndetermined'),
         iconWarning : document.getElementById('iconWarning'),
         iconShow : document.getElementById('iconShow')
     };
