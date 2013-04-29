@@ -14,7 +14,7 @@ function initIconTest(httpstatus, peek) {
     data.httpStatus = httpstatus;
     data.preferences.passwordPeek = peek;
     data.preferences.disableUndetermined = true;
-    data.preferences.enableCustomIcons = true;
+    data.preferences.enableCustomIcons = false;
     data.preferences.iconWarning = "";
     data.preferences.iconShow = "";
 
@@ -22,6 +22,7 @@ function initIconTest(httpstatus, peek) {
 }
 
 initIconTest("HTTPS", true);
+
 
 // http://stackoverflow.com/a/9208880
 function mouseDown(element) {
@@ -40,10 +41,12 @@ function mouseUp(element) {
 }
 
 asyncTest( 'show password icon on HTTPS site', function() {
-initIconTest("HTTPS", true);
+    initIconTest("HTTPS", true);
     let element = document.getElementById('pwdfield1');
-    fieldIcon.add(element, null);
     setTimeout(function() {
+        let payload = {};
+        payload.state = "Secure";
+        fieldIcon.add(element, payload);
         let icon = document.getElementById('isa-field-icon pwdfield1');
         ok( icon.style.visibility == "hidden", 'icon is not visible when the password field does not have focus')
         element.focus();

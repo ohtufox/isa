@@ -3,9 +3,9 @@
     const DOM_LISTENER_TARGET = document.body;
     const DOM_LISTENER_OPTIONS = {
         childList:true,
-subtree:true
+        subtree:true
     };
-
+    
     intelligentSecurityAdvisor.init = function(data) {
         if(document.readyState === 'complete') {
             initialize(data);
@@ -49,7 +49,8 @@ subtree:true
     function checkNode(node){
         checkChildNodes(node);
         if(node.type === 'password'){
-            showPwd.fixElement(node);
+            //what this should do? 
+            //showPwd.fixElement(node);
         }
     }
 

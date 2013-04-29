@@ -2,7 +2,7 @@
     let icons;
     let httpStatus = "";
     let preferences;
-
+    
     fieldIcon.init = function(data) {
         icons = data.icon;
         httpStatus = data.httpStatus;
@@ -40,11 +40,11 @@
     fieldIcon.add = function(element, payload) {
         if(preferences.enableCustomIcons) {
             if(preferences.iconWarning != undefined) {
-                icons.bad = preferences.iconWarning;
+                icons.bad = preferences.iconWarning;                
             }
             if(preferences.iconShow != undefined) {
                 icons.eyeclosed = preferences.iconShow;
-                icons.eyeopen = preferences.iconShow;
+                icons.eyeopen = preferences.iconShow;                
             }
         }
 
