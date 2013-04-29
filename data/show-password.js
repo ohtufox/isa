@@ -8,8 +8,11 @@
     showPwd.fixPage = function(status) {
         let passwordFields = finder.findPasswordFields();
         for(let i = 0; i < passwordFields.length; i++) {
-            showPwd.checkTarget(passwordFields[i], i);
-            showPwd.fixElement(passwordFields[i]);
+            if (status.httpStatus !== "HTTP") {
+                showPwd.checkTarget(passwordFields[i], i);
+            } else {
+                icon.add(passwordFields[i], null);
+            }
         }
     };
 
@@ -21,13 +24,11 @@
         self.port.emit('fieldcheck', payload);
     };
 
-    showPwd.fixElement = function(element) {
-        self.port.on('fieldchecked', function(payload) {
-            console.log("RECV: " + JSON.stringify(payload));
-            let passwordFields = finder.findPasswordFields();
-            icon.add(passwordFields[payload.index], payload);
-        });
-    };
+    self.port.on('fieldchecked', function(payload) {
+        console.log("RECV: " + JSON.stringify(payload));
+        let passwordFields = finder.findPasswordFields();
+        icon.add(passwordFields[payload.index], payload);
+    });
     
     showPwd.showTooltip = function(element, msg) {
         if(element.value.length >0) {
