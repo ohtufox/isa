@@ -17,9 +17,11 @@ subtree:true
     };
 
     function initialize(data) {
-        fieldIcon.init(data);
-        showPwd.fixPage(data);
-        addDOMListener();
+        if(DOM_LISTENER_TARGET != null) {
+            fieldIcon.init(data);
+            showPwd.fixPage(data);
+            addDOMListener();
+        }
     }
 
     function addDOMListener() {
