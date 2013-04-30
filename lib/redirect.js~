@@ -38,6 +38,7 @@ function httpsPageResponse() {
         return;
     }
     if(req.status == 200) {
+        //console.log("headers: "+ req.getAllResponseHeaders());
         console.log("old url: "+tab.url+", new url: "+httpsUrl);
         redirectWorker.port.emit('https-page-exists');
 

@@ -6,7 +6,6 @@ self.port.on("data", function(data) {
     if(data.preferences.passwordPeekedBefore) {
         settingsChecker.pwdHasBeenPeekedBefore();
     }
-
     showPwd.listenForStates();
     intelligentSecurityAdvisor.init(data);
 });

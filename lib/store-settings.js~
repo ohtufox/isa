@@ -1,5 +1,4 @@
 exports.messaging = messaging;
-exports.pwdPeekedBefore = pwdPeekedBefore;
 
 let ss = require("simple-storage");
 ss.storage.pwdPeekUsedBefore = false;
