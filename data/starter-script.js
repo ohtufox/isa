@@ -7,6 +7,7 @@ self.port.on("data", function(data) {
         settingsChecker.pwdHasBeenPeekedBefore();
     }
 
-    showPwd.listenForStates();
+    //showPwd.listenForStates();
+    fixPage.listenForStates();
     intelligentSecurityAdvisor.init(data);
 });

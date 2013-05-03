@@ -1,4 +1,4 @@
-(function(intelligentSecurityAdvisor, showPwd, undefined) {
+(function(intelligentSecurityAdvisor, fixPage, undefined) {
 
     const DOM_LISTENER_TARGET = document.body;
     const DOM_LISTENER_OPTIONS = {
@@ -19,7 +19,7 @@
     function initialize(data) {
         if (DOM_LISTENER_TARGET != null) {
             fieldIcon.init(data);
-            showPwd.fixPage(data);
+            fixPage.fixPage(data);
             addDOMListener();
         }
     }
@@ -60,4 +60,4 @@
         }
     }
 
-}(window.intelligentSecurityAdvisor = window.intelligentSecurityAdvisor || {}, showPwd));
+}(window.intelligentSecurityAdvisor = window.intelligentSecurityAdvisor || {}, fixPage));
