@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html>
+    
     <head>
         <meta charset="utf-8">
         <title>Test https checker</title>
         <link rel="stylesheet" href="qunit/qunit.css" />
     </head>
+    
     <body>
         <div id="qunit"></div>
         <div id="qunit-fixture">
             <form id="insecureForm1" action="http://asdfasfas">
                 <input id="insecurePassword1" type="password" />
-            </form>    
+            </form>
             <form id="secureForm1" action="https://asdfasfas">
                 <input id="securePassword1" type="password" />
-            </form>    
+            </form>
             <input id="formlessPassword1" type="password" />
         </div>
         <script src="qunit/qunit.js"></script>
         <script src="../../data/https-checker.js" type="application/javascript;version=1.7"></script>
         <script src="tests/test-https-checker.js" type="application/javascript;version=1.7"></script>
     </body>
+
 </html>

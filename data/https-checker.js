@@ -10,17 +10,17 @@
         if (!elementIsValidForm(formElement)) {
             return false;
         }
-        let formAction = getAction(formElement);   
+        let formAction = getAction(formElement);
         let isSecure = actionIsSecure(formAction);
         return isSecure;
     };
 
     function elementIsValidForm(element) {
-        if(element != null && element.nodeName === 'FORM') {
+        if (element != null && element.nodeName === 'FORM') {
             return true;
         } else {
             return false;
-        } 
+        }
     }
 
     function getAction(form) {

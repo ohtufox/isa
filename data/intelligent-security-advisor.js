@@ -2,12 +2,12 @@
 
     const DOM_LISTENER_TARGET = document.body;
     const DOM_LISTENER_OPTIONS = {
-        childList:true,
-        subtree:true
+        childList: true,
+        subtree: true
     };
-    
+
     intelligentSecurityAdvisor.init = function(data) {
-        if(document.readyState === 'complete') {
+        if (document.readyState === 'complete') {
             initialize(data);
         } else {
             setTimeout(function() {
@@ -17,7 +17,7 @@
     };
 
     function initialize(data) {
-        if(DOM_LISTENER_TARGET != null) {
+        if (DOM_LISTENER_TARGET != null) {
             fieldIcon.init(data);
             showPwd.fixPage(data);
             addDOMListener();
@@ -41,14 +41,14 @@
     }
 
     function checkNodeList(nodeList) {
-        for(let i = 0; i < nodeList.length; i++) {
+        for (let i = 0; i < nodeList.length; i++) {
             checkNode(nodeList[i]);
         }
     }
 
-    function checkNode(node){
+    function checkNode(node) {
         checkChildNodes(node);
-        if(node.type === 'password'){
+        if (node.type === 'password') {
             //what this should do? 
             //showPwd.fixElement(node);
         }

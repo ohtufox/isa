@@ -1,13 +1,13 @@
-(function(showPwd, finder, icon, undefined){
+(function(showPwd, finder, icon, undefined) {
     showPwd.peekPassword = function(element) {
-        if(element.value.length >0) {
+        if (element.value.length > 0) {
             showPassword(element);
-        }		
+        }
     };
-	
+
     showPwd.fixPage = function(status) {
         let passwordFields = finder.findPasswordFields();
-        for(let i = 0; i < passwordFields.length; i++) {
+        for (let i = 0; i < passwordFields.length; i++) {
             if (status.httpStatus !== "HTTP") {
                 showPwd.checkTarget(passwordFields[i], i);
             } else {
@@ -16,9 +16,9 @@
         }
     };
 
-    
-    showPwd.checkTarget  = function(element, index) {
-        payload=new Object();
+
+    showPwd.checkTarget = function(element, index) {
+        payload = new Object();
         if (element.form == undefined) {
             // password field outside a form.
             return;
@@ -37,9 +37,9 @@
             icon.add(passwordFields[payload.index], payload);
         });
     };
-    
+
     showPwd.showTooltip = function(element, msg) {
-        if(element.value.length >0) {
+        if (element.value.length > 0) {
             element.title = msg;
         }
     };
@@ -63,11 +63,11 @@
         });
     };
 
-    function showPassword(element){	
+    function showPassword(element) {
         element.type = 'text';
     }
-	
-    function hidePassword(element){
+
+    function hidePassword(element) {
         element.type = 'password';
     }
 

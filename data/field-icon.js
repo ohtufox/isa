@@ -1,24 +1,24 @@
-(function(fieldIcon, undefined){
+(function(fieldIcon, undefined) {
     let icons;
     let httpStatus = "";
     let preferences;
-    
+
     fieldIcon.init = function(data) {
         icons = data.icon;
         httpStatus = data.httpStatus;
         preferences = data.preferences;
     }
-    
+
     fieldIcon.requestUnsecurePanel = function() {
-        if(settingsChecker.httpsPageExists()) {
+        if (settingsChecker.httpsPageExists()) {
             self.port.emit('info', 'unsecure-panel-with-redirect');
         } else {
             self.port.emit('info', 'unsecure-panel');
         }
     }
-   
+
     fieldIcon.add = function(element, payload) {
-        let imgi=document.createElement("img");
+        let imgi = document.createElement("img");
         checkPreferences();
         recursiveZIndex(element, imgi);
         addPanelListener(element, imgi);
@@ -30,16 +30,16 @@
     function recursiveZIndex(field, icon) {
         let element = field;
         while (element !== document.body) {
-            let zInd = document.defaultView.getComputedStyle(element,null).zIndex;
+            let zInd = document.defaultView.getComputedStyle(element, null).zIndex;
             if (zInd !== "auto" && zInd !== "") {
                 // THANK YOU JAVASCRIPT.. http://jsfiddle.net/8yX85/2/
                 // Yes. This would still break if there are elements
                 // with z-index 10000001 and 100000003 where second one doesnt have
                 // password field and is on top of the first one.
-                if (parseFloat(zInd) < 10000000) {    
+                if (parseFloat(zInd) < 10000000) {
                     icon.style.zIndex = parseFloat(zInd);
                 } else {
-                    icon.style.zIndex = parseFloat(zInd)+10000;
+                    icon.style.zIndex = parseFloat(zInd) + 10000;
                 }
                 return;
             }
@@ -48,18 +48,18 @@
     }
 
     function checkPreferences() {
-        if(preferences.enableCustomIcons) {
-            if(preferences.iconWarning != undefined) {
-                icons.bad = preferences.iconWarning;                
+        if (preferences.enableCustomIcons) {
+            if (preferences.iconWarning != undefined) {
+                icons.bad = preferences.iconWarning;
             }
-            if(preferences.iconShow != undefined) {
+            if (preferences.iconShow != undefined) {
                 icons.eyeclosed = preferences.iconShow;
-                icons.eyeopen = preferences.iconShow;                
+                icons.eyeopen = preferences.iconShow;
             }
         }
 
     }
-    
+
     function checkSecurityStatus(element, payload, imgi) {
         if (httpStatus == "HTTPS") {
             switch (payload.state) {
@@ -67,11 +67,11 @@
                     return;
                 case "TARGET_UNDETERMINED":
                 case "No info available":
-                    if(preferences.disableUndetermined) {
+                    if (preferences.disableUndetermined) {
                         return;
                     }
                 case "Secure":
-                    if(preferences.passwordPeek) {
+                    if (preferences.passwordPeek) {
                         addPeekingEye(element, imgi);
                     } else {
                         return;
@@ -84,38 +84,38 @@
             }
         } else {
             addWarningIcon(element, imgi);
-        }    
+        }
     }
-    
+
     function positionIcon(element, imgi) {
         imgi.id = 'isa-field-icon ' + element.id;
         imgi.style.position = 'absolute';
 
-        let _body = document.getElementsByTagName('body') [0];
+        let _body = document.getElementsByTagName('body')[0];
         _body.appendChild(imgi);
 
         let rect = element.getBoundingClientRect();
         let height = rect.bottom - rect.top;
         // If the page is scrolled when its loaded we need to take into account the offset
-        imgi.style.left = window.pageXOffset + rect.right-height + 'px';
+        imgi.style.left = window.pageXOffset + rect.right - height + 'px';
         imgi.style.top = window.pageYOffset + rect.top + 'px';
-        
+
         let size = height;
         imgi.style.width = size + 'px';
     }
-    
+
     function addResizeListener(element, imgi) {
         window.addEventListener('resize', function(e) {
             let rect = element.getBoundingClientRect();
             let height = rect.bottom - rect.top;
-            imgi.style.left = window.pageXOffset + rect.right-height + 'px';
+            imgi.style.left = window.pageXOffset + rect.right - height + 'px';
             imgi.style.top = window.pageYOffset + rect.top + 'px';
         });
     }
-    
+
     function addPanelListener(element, imgi) {
-        imgi.addEventListener('mousedown', function(e) { 
-            if(httpStatus !== "HTTPS") {
+        imgi.addEventListener('mousedown', function(e) {
+            if (httpStatus !== "HTTPS") {
                 imgi.className = "anchorclass";
                 e.preventDefault();
                 fieldIcon.requestUnsecurePanel();
@@ -123,7 +123,7 @@
         });
     }
 
-   function addWarningIcon(element, imgi) {
+    function addWarningIcon(element, imgi) {
         imgi.style.visibility = 'hidden';
         imgi.title = 'form is unsecure, click icon for more info';
         imgi.setAttribute('src', icons.bad);
@@ -132,9 +132,9 @@
         if (previousElement !== undefined) {
             displayOnFocus(previousElement, imgi);
         }
-   }
+    }
 
-   function  displayOnFocus(element, target) {
+    function displayOnFocus(element, target) {
         element.addEventListener('focus', function(e) {
             target.style.visibility = "visible";
         });
@@ -173,8 +173,8 @@
         let fields = document.getElementsByTagName("input");
         for (let i = 0; i < fields.length; i++) {
             if (fields[i] === element && i > 0) {
-                if (element.form === fields[i-1].form) {
-                    return fields[i-1];
+                if (element.form === fields[i - 1].form) {
+                    return fields[i - 1];
                 }
             }
         }

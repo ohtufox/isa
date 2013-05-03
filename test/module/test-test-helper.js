@@ -8,7 +8,7 @@ exports['Tests testHelpers url creation functionality'] = function(assert) {
     const titleToCheck = 'Testisivu';
     tabs.open({
         url: url,
-        onReady: function (tab) {
+        onReady: function(tab) {
             assert.assertEqual(tab.url, url);
             assert.assertEqual(tab.title, titleToCheck);
             assert.done();
