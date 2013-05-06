@@ -18,11 +18,9 @@ function initIconTest(httpstatus, peek) {
     data.preferences.enableCustomIcons = false;
     data.preferences.iconWarning = "";
     data.preferences.iconShow = "";
-
-    intelligentSecurityAdvisor.init(data);
+    
+    fieldIcon.init(data);
 }
-
-//initIconTest("HTTPS", true);
 
 
 // http://stackoverflow.com/a/9208880
@@ -42,11 +40,14 @@ function mouseUp(element) {
     element.dispatchEvent(evt);
 }
 
+
+
 asyncTest('show password icon on HTTPS site', function() {
     initIconTest("HTTPS", true);
     let element = document.getElementById('pwdfield1');
     setTimeout(function() {
         let payload = {};
+        payload.checkTarget = true;
         payload.state = "Secure";
         fieldIcon.add(element, payload);
         let icon = document.getElementById('isa-field-icon pwdfield1');
@@ -70,22 +71,11 @@ asyncTest('do not show any icons on undetermined form', function() {
     setTimeout(function() {
         let payload = {};
         payload.state = "TARGET_UNDETERMINED";
+        payload.checkTarget = true;
         fieldIcon.add(element, payload);
         let icon = document.getElementById('isa-field-icon pwdfield4');
-        element.focus();
+        element.focus();    
         equal(icon.src, '', 'field does not have an icon on undetermined form');
-        start();
-    }, TIMEOUT);
-});
-
-
-asyncTest('show warning icon on HTTP site', function() {
-    initIconTest("HTTP", true);
-    let element = document.getElementById('pwdfield2');
-    setTimeout(function() {
-        let icon = document.getElementById('isa-field-icon pwdfield2');
-        element.focus();
-        ok(endsWith(icon.src, 'warning_32.png'), 'focused field has warning icon on unsecure site');
         start();
     }, TIMEOUT);
 });
@@ -95,6 +85,7 @@ asyncTest('show warning icon on https form if target is unsecure', function() {
     let element = document.getElementById('pwdfield3');
     setTimeout(function() {
         let payload = {};
+        payload.checkTarget = true;
         payload.state = "Broken state";
         fieldIcon.add(element, payload);
         let icon = document.getElementById('isa-field-icon pwdfield3');
@@ -103,3 +94,16 @@ asyncTest('show warning icon on https form if target is unsecure', function() {
         start();
     }, TIMEOUT);
 });
+
+asyncTest('show warning icon on HTTP site', function() {
+    initIconTest("HTTP", true);
+    let element = document.getElementById('pwdfield2');
+    setTimeout(function() {
+        fieldIcon.add(element, null);
+        let icon = document.getElementById('isa-field-icon pwdfield2');
+        element.focus();
+        ok(endsWith(icon.src, 'warning_32.png'), 'focused field has warning icon on unsecure site');
+        start();
+    }, TIMEOUT);
+});
+
