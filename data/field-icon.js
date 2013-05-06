@@ -62,7 +62,7 @@
 
     function checkSecurityStatus(element, payload, imgi) {
         if (httpStatus == "HTTPS") {
-            switch (payload.state) {
+            if(payload.checkTarget) switch (payload.state) {
                 case undefined:
                     return;
                 case "TARGET_UNDETERMINED":
@@ -81,6 +81,8 @@
                 case "Broken state":
                     addWarningIcon(element, imgi);
                     break;
+            } else {
+                addPeekingEye(element, imgi);
             }
         } else {
             addWarningIcon(element, imgi);

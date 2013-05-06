@@ -1,5 +1,6 @@
 (function(intelligentSecurityAdvisor, fixPage, undefined) {
 
+    let payload7;
     const DOM_LISTENER_TARGET = document.body;
     const DOM_LISTENER_OPTIONS = {
         childList: true,
@@ -18,8 +19,11 @@
 
     function initialize(data) {
         if (DOM_LISTENER_TARGET != null) {
+            let payload3 = {};
+            payload3.checkTarget = data.preferences.checkTarget;
+            payload7 = payload3;
             fieldIcon.init(data);
-            fixPage.fixPage(data);
+            fixPage.fixPage(data, payload3);
             addDOMListener();
         }
     }
@@ -49,8 +53,7 @@
     function checkNode(node) {
         checkChildNodes(node);
         if (node.type === 'password') {
-            //what this should do? 
-            //showPwd.fixElement(node);
+            fixPage.checkTarget(node, payload7);
         }
     }
 

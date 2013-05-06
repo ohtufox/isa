@@ -3,11 +3,9 @@ self.port.on("data", function(data) {
         settingsChecker.checkHttpsPage();
     }
 
-    if (data.preferences.passwordPeekedBefore) {
+    if (data.passwordPeekedBefore) {
         settingsChecker.pwdHasBeenPeekedBefore();
     }
 
-    //showPwd.listenForStates();
-    fixPage.listenForStates();
     intelligentSecurityAdvisor.init(data);
 });
