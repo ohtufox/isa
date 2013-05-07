@@ -18,7 +18,7 @@ function initIconTest(httpstatus, peek) {
     data.preferences.enableCustomIcons = false;
     data.preferences.iconWarning = "";
     data.preferences.iconShow = "";
-    
+
     fieldIcon.init(data);
 }
 
@@ -29,81 +29,69 @@ function mouseDown(element) {
     var evt = document.createEvent("MouseEvents");
     // type, canBubble, cancelable, view, detail, screenX, screenY, clientX, clientY, ctrlKey, altKey, shiftKey, metaKey, button, relatedTarget
     evt.initMouseEvent("mousedown", true, true, window,
-        0, 0, 0, 0, 0, false, false, false, false, 0, null);
+            0, 0, 0, 0, 0, false, false, false, false, 0, null);
     element.dispatchEvent(evt);
 }
 
 function mouseUp(element) {
     var evt = document.createEvent("MouseEvents");
     evt.initMouseEvent("mouseup", true, true, window,
-        0, 0, 0, 0, 0, false, false, false, false, 0, null);
+            0, 0, 0, 0, 0, false, false, false, false, 0, null);
     element.dispatchEvent(evt);
 }
 
 
 
-asyncTest('show password icon on HTTPS site', function() {
+test('show password icon on HTTPS site', function() {
     initIconTest("HTTPS", true);
     let element = document.getElementById('pwdfield1');
-    setTimeout(function() {
-        let payload = {};
-        payload.checkTarget = true;
-        payload.state = "Secure";
-        fieldIcon.add(element, payload);
-        let icon = document.getElementById('isa-field-icon pwdfield1');
-        ok(icon.style.visibility == "hidden", 'icon is not visible when the password field does not have focus')
-        element.focus();
-        // XXX: Breaks if test is opened in non-focused tab
-        //    ok( icon.style.visibility == "visible", 'icon is visible to the user when password field has focus')
-        ok(endsWith(icon.src, 'eye_closed_16.png'), 'focused field has closed eye icon on secure site');
-        mouseDown(icon);
-        //    ok( icon.style.visibility == "visible", 'icon is visible to user while icon is being clicked')
-        ok(endsWith(icon.src, 'eye_open_16.png'), 'while the icon is being clicked an open eye icon is displayed');
-        mouseUp(icon);
-        ok(endsWith(icon.src, 'eye_closed_16.png'), 'icon changes back to closed eye when mouse button is released');
-        start();
-    }, TIMEOUT);
+    let payload = {};
+    payload.checkTarget = true;
+    payload.state = "Secure";
+    fieldIcon.add(element, payload);
+    let icon = document.getElementById('isa-field-icon pwdfield1');
+    ok(icon.style.visibility == "hidden", 'icon is not visible when the password field does not have focus')
+    element.focus();
+    // XXX: Breaks if test is opened in non-focused tab
+    //    ok( icon.style.visibility == "visible", 'icon is visible to the user when password field has focus')
+    ok(endsWith(icon.src, 'eye_closed_16.png'), 'focused field has closed eye icon on secure site');
+    mouseDown(icon);
+    //    ok( icon.style.visibility == "visible", 'icon is visible to user while icon is being clicked')
+    ok(endsWith(icon.src, 'eye_open_16.png'), 'while the icon is being clicked an open eye icon is displayed');
+    mouseUp(icon);
+    ok(endsWith(icon.src, 'eye_closed_16.png'), 'icon changes back to closed eye when mouse button is released');
 });
 
-asyncTest('do not show any icons on undetermined form', function() {
+test('do not show any icons on undetermined form', function() {
     initIconTest("HTTPS", true);
     let element = document.getElementById('pwdfield4');
-    setTimeout(function() {
-        let payload = {};
-        payload.state = "TARGET_UNDETERMINED";
-        payload.checkTarget = true;
-        fieldIcon.add(element, payload);
-        let icon = document.getElementById('isa-field-icon pwdfield4');
-        element.focus();    
-        equal(icon.src, '', 'field does not have an icon on undetermined form');
-        start();
-    }, TIMEOUT);
+    let payload = {};
+    payload.state = "TARGET_UNDETERMINED";
+    payload.checkTarget = true;
+    fieldIcon.add(element, payload);
+    let icon = document.getElementById('isa-field-icon pwdfield4');
+    element.focus();    
+    equal(icon.src, '', 'field does not have an icon on undetermined form');
 });
 
-asyncTest('show warning icon on https form if target is unsecure', function() {
+test('show warning icon on https form if target is unsecure', function() {
     initIconTest("HTTPS", true);
     let element = document.getElementById('pwdfield3');
-    setTimeout(function() {
-        let payload = {};
-        payload.checkTarget = true;
-        payload.state = "Broken state";
-        fieldIcon.add(element, payload);
-        let icon = document.getElementById('isa-field-icon pwdfield3');
-        element.focus();
-        ok(endsWith(icon.src, 'warning_32.png'), 'focused field has warning icon on https form if target is unsecure');
-        start();
-    }, TIMEOUT);
+    let payload = {};
+    payload.checkTarget = true;
+    payload.state = "Broken state";
+    fieldIcon.add(element, payload);
+    let icon = document.getElementById('isa-field-icon pwdfield3');
+    element.focus();
+    ok(endsWith(icon.src, 'warning_32.png'), 'focused field has warning icon on https form if target is unsecure');
 });
 
-asyncTest('show warning icon on HTTP site', function() {
+test('show warning icon on HTTP site', function() {
     initIconTest("HTTP", true);
     let element = document.getElementById('pwdfield2');
-    setTimeout(function() {
-        fieldIcon.add(element, null);
-        let icon = document.getElementById('isa-field-icon pwdfield2');
-        element.focus();
-        ok(endsWith(icon.src, 'warning_32.png'), 'focused field has warning icon on unsecure site');
-        start();
-    }, TIMEOUT);
+    fieldIcon.add(element, null);
+    let icon = document.getElementById('isa-field-icon pwdfield2');
+    element.focus();
+    ok(endsWith(icon.src, 'warning_32.png'), 'focused field has warning icon on unsecure site');
 });
 
