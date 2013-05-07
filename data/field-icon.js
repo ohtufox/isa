@@ -22,7 +22,8 @@
         checkPreferences();
         recursiveZIndex(element, imgi);
         addPanelListener(element, imgi);
-        checkSecurityStatus(element, payload, imgi);
+        let securityStatus = checkSecurityStatus(element, payload, imgi);
+        processSecurityStatus(element, imgi, securityStatus);
         positionIcon(element, imgi);
         addResizeListener(element, imgi);
     }
@@ -64,28 +65,40 @@
         if (httpStatus == "HTTPS") {
             if(payload.checkTarget) switch (payload.state) {
                 case undefined:
-                    return;
+                    return 'neutral';
                 case "TARGET_UNDETERMINED":
                 case "No info available":
-                    if (preferences.disableUndetermined) {
-                        return;
-                    }
+                    return 'neutral';
                 case "Secure":
-                    if (preferences.passwordPeek) {
-                        addPeekingEye(element, imgi);
-                    } else {
-                        return;
-                    }
                     break;
                 case "Insecure":
                 case "Broken state":
-                    addWarningIcon(element, imgi);
+                    return 'bad';
                     break;
             } else {
-                addPeekingEye(element, imgi);
+                console.log('Warning! Test settings in use, target page will not be checked!'):
+                return 'good';
             }
         } else {
-            addWarningIcon(element, imgi);
+            return 'bad';
+        }
+    }
+
+    function processSecurityStatus(element, imgi, status){
+        switch(state) {
+            case undefined:
+                console.log('securityStatus completely undefined, something is wrong.');
+            case 'neutral':
+                if(preferences.disableUndetermined){
+                    break;
+                }
+            case 'good':
+                if(preferences.passwordPeek) {
+                    addPeekingEye(element, imgi);
+                }
+                break;
+            case 'bad':
+                addWarningIcon(element, imgi);
         }
     }
 
@@ -151,11 +164,13 @@
     }
 
     function addPeekingEye(element, imgi) {
-        imgi.setAttribute('src', icons.eyeclosed);
-        imgi.style.visibility = 'hidden';
-        displayOnFocus(element, imgi);
-        addEyeAnimation(imgi);
-        showPwd.addMouseDownPeekListener(imgi, element);
+        if(preferences.passwordPeek) {
+            imgi.setAttribute('src', icons.eyeclosed);
+            imgi.style.visibility = 'hidden';
+            displayOnFocus(element, imgi);
+            addEyeAnimation(imgi);
+            showPwd.addMouseDownPeekListener(imgi, element);
+        }
     }
 
     function addEyeAnimation(element) {
