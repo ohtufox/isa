@@ -11,23 +11,27 @@
     };
     
     fixPage.checkTarget = function(element, payload) {
-        if(!payload.checkTarget) {
+        console.log('About to check target, payload.checkTarget=' + payload.checkTarget);
+        if(payload.checkTarget && element.form != undefined) {
+            createTargetCheck(element, payload);
+        } else if (!payload.checkTarget) {
+            console.log('Test mode');
             icon.add(element, payload);
-            return;
-        } else if (element.form == undefined) {
-            // password field outside a form.
-            return;
+        } else {
+            console.log('Unknown mode');
         } 
-
-        payload.action = element.form.action;
-
-        self.port.once('fieldchecked', function(enrichedPayload) {
-            console.log("RECV: " + JSON.stringify(enrichedPayload));
-            let passwordFields = finder.findPasswordFields();
-            icon.add(element, enrichedPayload);
-        });
-        console.log("SEND: " + JSON.stringify(payload));
-        self.port.emit('fieldcheck', payload);
     };
+
+    function createTargetCheck(element, payload) {
+        console.log('About to create target check request and listener for the result.');
+        console.log('Payload action set to form action');
+        self.port.once('fieldchecked', function(state) {
+            payload.state = state;
+            icon.add(element, payload);
+        });
+        console.log("Sending target check JSON: " + JSON.stringify(payload));
+        let formAction = element.form.action;
+        self.port.emit('fieldcheck', formAction);
+    }
 
 } (window.fixPage = window.fixPage || {}, fieldFinder, fieldIcon));

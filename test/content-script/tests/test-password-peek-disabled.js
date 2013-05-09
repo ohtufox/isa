@@ -29,50 +29,9 @@ asyncTest('JavaScript generated password field click peek test', function() {
     let testElement = document.getElementById('password4');
     ok(testElement.type === 'password', 'Element is originally of the type of password');
     setTimeout(function() {
-        console.log(document.getElementById('isa-field-icon password4'));
-        ok(document.getElementById('isa-field-icon password4') === 'undefined');
-        start();
-    }, TIMEOUT);
-});
-/*
-asyncTest('JavaScript generated password field click peek test 2', function() {
-    let container = document.getElementById('passwordFieldContainer');
-    container.innerHTML += '<div><div id="trojan"><input value="bar" id="password7" type="password"/></div></div>';
-    let testElement = document.getElementById('password7');
-    ok(testElement.type === 'password', 'Element is originally of the type of password');
-    setTimeout(function() {
-        let icon = document.getElementById('isa-field-icon password7');
+        let icon = document.getElementById('isa-field-icon password4');
         mouseDown(icon);
-        ok(testElement.type === 'text', 'After a click element is of the type of text');
+        ok(testElement.type === 'password', 'After a click element is of the type of text');
         start();
     }, TIMEOUT);
 });
-
-asyncTest('JavaScript changed password field click peek test', function() {
-    let container = document.getElementById('passwordFieldContainer');
-    container.innerHTML += '<input value="foo" id="password5" type="text"/>';
-    let testElement = document.getElementById('password5');
-    ok(testElement.type === 'text', 'Element is originally of the type of text');
-    testElement.type = 'password';
-    ok(testElement.type === 'password', 'Element is mutated to the type of password');
-    setTimeout(function() {
-        let icon = document.getElementById('isa-field-icon password5');
-        mouseDown(icon);
-        ok(testElement.type === 'text', 'After a click element is of the type of text');
-        start();
-    }, TIMEOUT);
-});
-
-asyncTest('JavaScript id changed password field click peek test', function() {
-    let container = document.getElementById('passwordFieldContainer');
-    container.innerHTML += '<input value="foo" id="password6" type="password"/>';
-    let testElement = document.getElementById('password6');
-    testElement.id = 'foobarPassword6';
-    setTimeout(function() {
-        let icon = document.getElementById('isa-field-icon foobarPassword6');
-        mouseDown(icon);
-        ok(testElement.type === 'text', 'After a click element is of the type of text');
-        start();
-    }, TIMEOUT);
-});
-*/

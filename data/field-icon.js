@@ -1,4 +1,10 @@
 (function(fieldIcon, undefined) {
+    const STATUS_FLAGS = {'TARGET_UNDETERMINED': 'neutral',
+                          undefined: 'neutral',
+                          'No info available': 'neutral',
+                          'Secure': 'good',
+                          'Insecure': 'bad',
+                          'Broken state': 'bad'};
     let icons;
     let httpStatus = "";
     let preferences;
@@ -63,20 +69,11 @@
 
     function checkSecurityStatus(element, payload, imgi) {
         if (httpStatus == "HTTPS") {
-            if(payload.checkTarget) switch (payload.state) {
-                case undefined:
-                    return 'neutral';
-                case "TARGET_UNDETERMINED":
-                case "No info available":
-                    return 'neutral';
-                case "Secure":
-                    break;
-                case "Insecure":
-                case "Broken state":
-                    return 'bad';
-                    break;
+            if(payload.checkTarget) {
+                console.log('Normal mode: state has been calculated to be ' + STATUS_FLAGS[payload.state]);
+                return STATUS_FLAGS[payload.state];
             } else {
-                console.log('Warning! Test settings in use, target page will not be checked!'):
+                console.log('Warning! Test settings in use, target page will not be checked!');
                 return 'good';
             }
         } else {
@@ -85,7 +82,7 @@
     }
 
     function processSecurityStatus(element, imgi, status){
-        switch(state) {
+        switch(status) {
             case undefined:
                 console.log('securityStatus completely undefined, something is wrong.');
             case 'neutral':
