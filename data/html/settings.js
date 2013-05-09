@@ -69,12 +69,17 @@
     iconShow.onchange = function(e) {
         uploadFile(iconShow);
     };
+
     let customIcons = document.getElementById('customIcons');
+    let themeSection = document.getElementById('theme');
     let enableCustomIcons = document.getElementById('enableCustomIcons');
     console.log(customIcons.hidden + " " + enableCustomIcons.checked + " " + enableCustomIcons.value);
     customIcons.hidden = !enableCustomIcons.checked;
+    themeSection.hidden = enableCustomIcons.checked;
+
     enableCustomIcons.onchange = function(e) {
         customIcons.hidden = !enableCustomIcons.checked;
+        themeSection.hidden = enableCustomIcons.checked;
     };
 
     function getFileContents(element) {

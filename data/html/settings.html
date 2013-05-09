@@ -7,39 +7,46 @@
     </head>
     <body>
         <div id="settingsMenu">
-            <h3>Intelligent Security Advisor</h3>
-            <p>Settings menu</p>
+            <div id="header">
+                <h3>Intelligent Security Advisor</h3>
+                <p>Settings menu</p>
+            </div>
             <section id="general">
-            <ul>
-                <li>
+                <div class="setting">
                     <label>Password peek is enabled</label>
                     <input type="checkbox" id="passwordPeek" name="passwordPeek" value="true" />
-                </li>
-                <li>
+                </div>
+                <div class="setting">
                     <label>Disable icon when form target can't be determined</label>
                     <input type="checkbox" id="disableUndetermined" name="disableUndetermined" value="false" />
-                </li>
-                <li>
+                </div>
+                <div class="setting">
                     <label>Use custom icons</label>
                     <input type="checkbox" id="enableCustomIcons" name="enableCustomIcons" value="false" />
-                </li>
-            </ul>
+                </div>
+            </section>
+            <section id="theme">
+                <div class="setting">
+                        <label>Choose a theme</label>
+                        <select id="themeSelection">
+                            <option value="0">Default theme</option>
+                            <option value="1">Alternative theme</option>
+                        </select>
+                </div>
             </section>
             <section id="customIcons">
-                <ul>
-                    <li class="thumbnail">
+                <div class="setting">
                         <label>Warning icon</label>
                         <input type="file" id="iconWarning" name="iconWarning" style="display: none" />
                         <input type="button" value="Browse..." onclick="document.getElementById('iconWarning').click();" />
                         <output id="iconWarningList"></output>
-                    </li>
-                    <li class="thumbnail">
+                </div>
+                <div class="setting">
                         <label>Password peek icon</label>
                         <input type="file" id="iconShow" name="iconShow" style="display: none" />
                         <input type="button" value="Browse..." onclick="document.getElementById('iconShow').click();" />
                         <output id="iconShowList"></output>
-                    </li>
-                </ul>
+                </div>
             </section>
             <button id="settingsSubmit" type="button">Save settings</button>
         </div>

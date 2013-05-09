@@ -1,13 +1,32 @@
 body {
-    font-size: 12pt; color: black
+    color: #222;  
+    font: 16px 'Trebuchet MS';
 }
-
+#header{
+    background-color: #4e7e0d;
+    color: white;
+    padding-left:10px;
+    margin-bottom: 10px;
+    width:495px;
+    border-radius: 3px;
+    height:70px;
+}
+.setting {
+    margin-bottom: 10px;
+    padding: 3px;
+    background-color: #e7fAc0;
+    width: 500px;
+    border-radius: 3px;
+    box-shadow: 1px 3px 5px #888888;
+}
 #settingsMenu {
     padding: 2px;
     border-width: 1px; 
     border: solid; 
-    border-radius: 2px; 
-    background-color: #e0e0e0
+    border-radius: 2px;
+    border-color:#550;
+    background-color: #e3FAA2;
+    padding: 15px;
 }
 
 .thumb {
@@ -16,18 +35,26 @@ body {
 }
 
 label {
-    position: absolute;
-    left: 50px;
+    display: inline-block;
+    width:350px;
 }
 
-input {
-    position: absolute;
-    left: 450px;
+input, select, button {
+    border: 1px solid #777777;
+    background: #729e2d;
+    color: white;
+    font: bold 11px 'Trebuchet MS';
+    padding: 4px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+button {
+    font: bold 15px 'Trebuchet MS';
+    border: 1px solid #777;
+    box-shadow: 1px 3px 5px #888888;
 }
 
 output {
-    position: absolute;
-    left: 600px;
 }
 
 .thumbnail {
