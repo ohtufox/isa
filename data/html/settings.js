@@ -4,15 +4,18 @@
         disableUndetermined: document.getElementById('disableUndetermined'),
         enableCustomIcons: document.getElementById('enableCustomIcons'),
         iconWarning: document.getElementById('iconWarning'),
-        iconShow: document.getElementById('iconShow')
+        iconShow: document.getElementById('iconShow'),
+        theme: document.getElementById('themeSelection')
     };
     const ELEMENT_HANDLERS = {
         checkbox: handleCheckbox,
-        file: handleFile
+        file: handleFile,
+        'select-one': handleSelect
     };
     const VALUE_COLLECTORS = {
         checkbox: getCheckboxValue,
-        file: getFileContents
+        file: getFileContents,
+        'select-one': getSelect
     };
 
     settingsMenu.applySettingsToPage = function(settings) {
@@ -31,6 +34,7 @@
 
     function submitForm() {
         let settings = collectSettings();
+        console.log('Submitting form, theme : ' + settings.theme);
         self.port.emit('settings', settings);
         return false;
     }
@@ -48,9 +52,16 @@
     function handleCheckbox(element, value) {
         element.checked = value;
     }
+    function handleSelect(element, value) {
+        element.value = value;
+    }
 
     function getCheckboxValue(element) {
         return element.checked;
+    }
+
+    function getSelect(element) {
+        return element.value;
     }
 
     function handleFile(element, value) {
