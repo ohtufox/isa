@@ -30,8 +30,6 @@
         addPanelListener(element, imgi);
         let securityStatus = checkSecurityStatus(element, payload, imgi);
         processSecurityStatus(element, imgi, securityStatus);
-        positionIcon(element, imgi);
-        addResizeListener(element, imgi);
     }
 
     function recursiveZIndex(field, icon) {
@@ -92,10 +90,14 @@
             case 'good':
                 if(preferences.passwordPeek) {
                     addPeekingEye(element, imgi);
+                    positionIcon(element, imgi);
+                    addResizeListener(element, imgi);
                 }
                 break;
             case 'bad':
                 addWarningIcon(element, imgi);
+                positionIcon(element, imgi);
+                addResizeListener(element, imgi);
         }
     }
 
