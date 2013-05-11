@@ -1,5 +1,6 @@
 (function(showPwd, finder, icon, undefined) {
-    showPwd.peekPassword = function(element) { // NOTE: No reason to export other than to use in tests..
+    showPwd.peekPassword = function(element) {
+        // NOTE: No reason to export other than to use in tests..
         if (element.value.length > 0) {
             showPassword(element);
         }
@@ -9,10 +10,9 @@
         element.addEventListener('mousedown', function(e) {
             e.preventDefault();
             if (settingsChecker.isPasswordPeekedBefore(target, element)) {
-                showPwd.peekPassword(element);
+                showPwd.peekPassword(target);
             }
         });
-
         element.addEventListener('mouseup', function(e) {
             hidePassword(target);
             e.preventDefault();
