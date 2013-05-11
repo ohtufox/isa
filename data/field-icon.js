@@ -1,10 +1,12 @@
 (function(fieldIcon, undefined) {
-    const STATUS_FLAGS = {'TARGET_UNDETERMINED': 'neutral',
-                          undefined: 'neutral',
-                          'No info available': 'neutral',
-                          'Secure': 'good',
-                          'Insecure': 'bad',
-                          'Broken state': 'bad'};
+    const STATUS_FLAGS = {
+        'TARGET_UNDETERMINED': 'neutral',
+        undefined: 'neutral',
+        'No info available': 'neutral',
+        'Secure': 'good',
+        'Insecure': 'bad',
+        'Broken state': 'bad'
+    };
     let icons;
     let httpStatus = "";
     let preferences;
@@ -15,14 +17,6 @@
         preferences = data.preferences;
     }
 
-    fieldIcon.requestUnsecurePanel = function() {
-        if (settingsChecker.httpsPageExists()) {
-            self.port.emit('info', 'unsecure-panel-with-redirect');
-        } else {
-            self.port.emit('info', 'unsecure-panel');
-        }
-    }
-
     fieldIcon.add = function(element, payload) {
         let imgi = document.createElement("img");
         checkPreferences();
@@ -30,6 +24,14 @@
         addPanelListener(element, imgi);
         let securityStatus = checkSecurityStatus(element, payload, imgi);
         processSecurityStatus(element, imgi, securityStatus);
+    }
+
+    function requestUnsecurePanel() {
+        if (settingsChecker.httpsPageExists()) {
+            self.port.emit('info', 'unsecure-panel-with-redirect');
+        } else {
+            self.port.emit('info', 'unsecure-panel');
+        }
     }
 
     function recursiveZIndex(field, icon) {
@@ -67,7 +69,7 @@
 
     function checkSecurityStatus(element, payload, imgi) {
         if (httpStatus == "HTTPS") {
-            if(payload.checkTarget) {
+            if (payload.checkTarget) {
                 console.log('Normal mode: state has been calculated to be ' + STATUS_FLAGS[payload.state]);
                 return STATUS_FLAGS[payload.state];
             } else {
@@ -79,16 +81,16 @@
         }
     }
 
-    function processSecurityStatus(element, imgi, status){
-        switch(status) {
+    function processSecurityStatus(element, imgi, status) {
+        switch (status) {
             case undefined:
                 console.log('securityStatus completely undefined, something is wrong.');
             case 'neutral':
-                if(preferences.disableUndetermined){
+                if (preferences.disableUndetermined) {
                     break;
                 }
             case 'good':
-                if(preferences.passwordPeek) {
+                if (preferences.passwordPeek) {
                     addPeekingEye(element, imgi);
                     positionIcon(element, imgi);
                     addResizeListener(element, imgi);
@@ -132,7 +134,7 @@
             if (httpStatus !== "HTTPS") {
                 imgi.className = "anchorclass";
                 e.preventDefault();
-                fieldIcon.requestUnsecurePanel();
+                requestUnsecurePanel();
             }
         });
     }
@@ -163,7 +165,8 @@
     }
 
     function addPeekingEye(element, imgi) {
-        if(preferences.passwordPeek) {
+        if (preferences.passwordPeek) {
+            imgi.title = 'show password';
             imgi.setAttribute('src', icons.eyeclosed);
             imgi.style.visibility = 'hidden';
             displayOnFocus(element, imgi);

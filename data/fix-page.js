@@ -9,17 +9,17 @@
             }
         }
     };
-    
+
     fixPage.checkTarget = function(element, payload) {
         console.log('About to check target, payload.checkTarget=' + payload.checkTarget);
-        if(payload.checkTarget && element.form != undefined) {
+        if (payload.checkTarget && element.form != undefined) {
             createTargetCheck(element, payload);
         } else if (!payload.checkTarget) {
             console.log('Test mode');
             icon.add(element, payload);
         } else {
             console.log('Unknown mode');
-        } 
+        }
     };
 
     function createTargetCheck(element, payload) {
@@ -34,4 +34,4 @@
         self.port.emit('fieldcheck', formAction);
     }
 
-} (window.fixPage = window.fixPage || {}, fieldFinder, fieldIcon));
+}(window.fixPage = window.fixPage || {}, fieldFinder, fieldIcon));

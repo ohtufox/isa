@@ -23,9 +23,9 @@
             imgi.className = "anchorclass";
             notifyAboutCleartext();
             peekedBefore = true;
-        } else {
-            showPwd.peekPassword(element);
+            return false;
         }
+        return true;
     };
 
     function notifyAboutCleartext() {

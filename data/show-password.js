@@ -1,20 +1,16 @@
 (function(showPwd, finder, icon, undefined) {
-    showPwd.peekPassword = function(element) {
+    showPwd.peekPassword = function(element) { // NOTE: No reason to export other than to use in tests..
         if (element.value.length > 0) {
             showPassword(element);
-        }
-    };
-
-    showPwd.showTooltip = function(element, msg) {
-        if (element.value.length > 0) {
-            element.title = msg;
         }
     };
 
     showPwd.addMouseDownPeekListener = function(element, target) {
         element.addEventListener('mousedown', function(e) {
             e.preventDefault();
-            settingsChecker.isPasswordPeekedBefore(target, element);
+            if (settingsChecker.isPasswordPeekedBefore(target, element)) {
+                showPwd.peekPassword(element);
+            }
         });
 
         element.addEventListener('mouseup', function(e) {
