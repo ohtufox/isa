@@ -70,8 +70,7 @@ test('do not show any icons on undetermined form', function() {
     payload.checkTarget = true;
     fieldIcon.add(element, payload);
     let icon = document.getElementById('isa-field-icon pwdfield4');
-    element.focus();    
-    equal(icon.src, '', 'field does not have an icon on undetermined form');
+    equal(icon, null, 'field does not have an icon on undetermined form');
 });
 
 test('show warning icon on https form if target is unsecure', function() {
