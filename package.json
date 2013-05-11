@@ -1,11 +1,11 @@
 {
-    "name": "isa", 
+    "name": "password_knighth", 
     "license": "MPL 2.0", 
     "author": "Ohtufox", 
     "version": "1.0", 
-    "fullName": "Intelligent Security Advisor", 
+    "fullName": "Password Knight", 
     "id": "jid1-GM278EkQDBAX4A", 
-    "description": "Security add-on that gives user information about the safety of their password field data.",
+    "description": "Security add-on that protects user's passswords by giving them information about the safety of their password field data.",
     "tests": "test/module/",
     "preferences": [{
         "name": "passwordPeek",

@@ -19,6 +19,9 @@ body {
     border-radius: 3px;
     box-shadow: 1px 3px 5px #888888;
 }
+h3{
+    padding-top: 4px;
+}
 #settingsMenu {
     padding: 2px;
     border-width: 1px; 
@@ -27,6 +30,8 @@ body {
     border-color:#550;
     background-color: #e3FAA2;
     padding: 15px;
+    width: 510px;
+    padding-bottom:20px;
 }
 
 .thumb {
