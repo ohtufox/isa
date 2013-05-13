@@ -1,8 +1,9 @@
 (function(fixPage, finder, icon, undefined) {
-    fixPage.fixPage = function(status, payload) {
+    fixPage.fixPage = function(data, payload) {
+        icon.init(data);
         let passwordFields = finder.findPasswordFields();
         for (let i = 0; i < passwordFields.length; i++) {
-            if (status.httpStatus !== "HTTP") {
+            if (data.httpStatus !== "HTTP") {
                 fixPage.checkTarget(passwordFields[i], payload);
             } else {
                 icon.add(passwordFields[i], payload);

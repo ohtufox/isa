@@ -27,11 +27,7 @@
     }
 
     function requestUnsecurePanel() {
-        if (settingsChecker.httpsPageExists()) {
-            self.port.emit('info', 'unsecure-panel-with-redirect');
-        } else {
             self.port.emit('info', 'unsecure-panel');
-        }
     }
 
     function recursiveZIndex(field, icon) {
