@@ -31,7 +31,7 @@ asyncTest('JavaScript generated password field click peek test', function() {
     setTimeout(function() {
         let icon = document.getElementById('isa-field-icon password4');
         mouseDown(icon);
-        ok(testElement.type === 'password', 'After a click element is of the type of text');
+        ok(testElement.type === 'password', 'After a click element is of the type of password');
         start();
     }, TIMEOUT);
 });

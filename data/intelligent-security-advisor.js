@@ -22,7 +22,6 @@
             let payload3 = {};
             payload3.checkTarget = data.preferences.checkTarget;
             payload7 = payload3;
-            //fieldIcon.init(data);
             fixPage.fixPage(data, payload3);
             addDOMListener();
         }

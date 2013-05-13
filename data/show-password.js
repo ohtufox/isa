@@ -1,4 +1,4 @@
-(function(showPwd, finder, icon, undefined) {
+(function(showPwd, undefined) {
     showPwd.peekPassword = function(element) {
         // NOTE: No reason to export other than to use in tests..
         if (element.value.length > 0) {
@@ -34,4 +34,4 @@
         element.type = 'password';
     }
 
-}(window.showPwd = window.showPwd || {}, fieldFinder, fieldIcon));
+}(window.showPwd = window.showPwd || {}));
