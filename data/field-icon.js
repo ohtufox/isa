@@ -11,12 +11,19 @@
     let httpStatus = "";
     let preferences;
 
+    // Initialize fieldIcon with data inside an object
+    // data.icon(.bad|.eyeclosed|.eyeopen): source of the icon.
+    // data.httpStatus: "HTTP"|"HTTPS", if the page itself is secure
+    // data.preferences: map of addon settings
     fieldIcon.init = function(data) {
         icons = data.icon;
         httpStatus = data.httpStatus;
         preferences = data.preferences;
     }
 
+    // Add icon to password field
+    // element: password field
+    // payload: 
     fieldIcon.add = function(element, payload) {
         let imgi = document.createElement("img");
         checkPreferences();
@@ -35,10 +42,8 @@
         while (element !== document.body) {
             let zInd = document.defaultView.getComputedStyle(element, null).zIndex;
             if (zInd !== "auto" && zInd !== "") {
-                // THANK YOU JAVASCRIPT.. http://jsfiddle.net/8yX85/2/
-                // Yes. This would still break if there are elements
-                // with z-index 10000001 and 100000003 where second one doesnt have
-                // password field and is on top of the first one.
+                // NOTE: getComputerStyle() converts large enough numeric values to lossy e-notation, which is quite bad.
+                // (see http://jsfiddle.net/8yX85/2/ )
                 if (parseFloat(zInd) < 10000000) {
                     icon.style.zIndex = parseFloat(zInd);
                 } else {
@@ -50,6 +55,7 @@
         }
     }
 
+    // Override icons with custom icons from preferences.
     function checkPreferences() {
         if (preferences.enableCustomIcons) {
             if (preferences.iconWarning != undefined) {
@@ -109,6 +115,7 @@
         let rect = element.getBoundingClientRect();
         let height = rect.bottom - rect.top;
         // If the page is scrolled when its loaded we need to take into account the offset
+        // XXX: What happens if the page is scrolled but password field has fixed position?
         imgi.style.left = window.pageXOffset + rect.right - height + 'px';
         imgi.style.top = window.pageYOffset + rect.top + 'px';
 
