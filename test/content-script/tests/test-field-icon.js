@@ -8,7 +8,6 @@ function initIconTest(httpstatus, peek) {
     let data = new Object();
     data.icon = new Object();
     data.preferences = new Object();
-    data.icon.good = "../../data/icons/checkmark_32.png";
     data.icon.bad = "../../data/icons/warning_32.png";
     data.icon.eyeopen = "../../data/icons/eye_open_16.png";
     data.icon.eyeclosed = "../../data/icons/eye_closed_16.png";

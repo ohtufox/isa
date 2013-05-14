@@ -5,7 +5,6 @@ data.preferences = new Object();
 data.preferences.passwordPeek = true;
 data.preferences.checkTarget = false;
 data.passwordPeekedBefore = true;
-data.icon.good = "../../data/icons/checkmark_32.png";
 data.icon.bad = "../../data/icons/warning_32.png";
 data.icon.eyeopen = "../../data/icons/eye_open_16.png";
 data.icon.eyeclosed = "../../data/icons/eye_closed_16.png";
