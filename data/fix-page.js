@@ -28,8 +28,8 @@
         queue++;
         console.log('About to create target check request and listener for the result.');
         console.log('Payload action set to form action');
-        self.port.once(queue + 'fieldchecked' + queue, function(state) {
-            console.log('Once in a lifetime!');
+        self.port.once(queue + 'fieldchecked', function(state) {
+            console.log('Once in a lifetime! (' + queue + ')');
             payload.state = state;
             icon.add(element, payload);
         });
