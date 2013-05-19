@@ -72,7 +72,6 @@
     function checkSecurityStatus(element, payload, imgi) {
         if (httpStatus == "HTTPS") {
             if (payload.checkTarget) {
-                console.log('Normal mode: state has been calculated to be ' + STATUS_FLAGS[payload.state]);
                 return STATUS_FLAGS[payload.state];
             } else {
                 console.log('Warning! Test settings in use, target page will not be checked!');

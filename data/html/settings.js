@@ -34,7 +34,6 @@
 
     function submitForm() {
         let settings = collectSettings();
-        console.log('Submitting form, theme : ' + settings.theme);
         self.port.emit('settings', settings);
         return false;
     }
@@ -84,7 +83,6 @@
     let customIcons = document.getElementById('customIcons');
     let themeSection = document.getElementById('theme');
     let enableCustomIcons = document.getElementById('enableCustomIcons');
-    console.log(customIcons.hidden + " " + enableCustomIcons.checked + " " + enableCustomIcons.value);
     customIcons.hidden = !enableCustomIcons.checked;
     themeSection.hidden = enableCustomIcons.checked;
 

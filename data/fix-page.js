@@ -13,9 +13,8 @@
     };
 
     fixPage.checkTarget = function(element, payload) {
-        console.log('About to check target, payload.checkTarget=' + payload.checkTarget);
         if (payload.checkTarget && element.form != undefined) {
-            createTargetCheck(element, payload);
+            createTargetCheck(element, payload, ++queue);
         } else if (!payload.checkTarget) {
             console.log('Test mode');
             icon.add(element, payload);
@@ -24,16 +23,11 @@
         }
     };
 
-    function createTargetCheck(element, payload) {
-        queue++;
-        console.log('About to create target check request and listener for the result.');
-        console.log('Payload action set to form action');
+    function createTargetCheck(element, payload, queue) {
         self.port.once(queue + 'fieldchecked', function(state) {
-            console.log('Once in a lifetime! (' + queue + ')');
             payload.state = state;
             icon.add(element, payload);
         });
-        console.log("Sending target check JSON: " + JSON.stringify(payload));
         let request = {formAction: element.form.action, queue: queue};
         self.port.emit('fieldcheck', request);
     }
