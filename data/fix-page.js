@@ -34,8 +34,8 @@
             icon.add(element, payload);
         });
         console.log("Sending target check JSON: " + JSON.stringify(payload));
-        let formAction = element.form.action;
-        self.port.emit('fieldcheck', formAction, queue);
+        let request = {formAction: element.form.action, queue: queue};
+        self.port.emit('fieldcheck', request);
     }
 
 }(window.fixPage = window.fixPage || {}, fieldFinder, fieldIcon));
